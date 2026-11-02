@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Iniciar Sesión — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <main class="main-content">
+    <div class="auth-layout">
+
+      <aside class="auth-side">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=900" alt="Perros rescatados corriendo felices" onerror="this.onerror=null;this.src='../imagenes/perro.angel.webp';">
+        <div class="auth-side-content">
+          <h2>Qué bueno verte de nuevo</h2>
+          <ul class="auth-benefits">
+            <li><i class="fa-solid fa-heart"></i> Postúlate para adoptar</li>
+            <li><i class="fa-solid fa-bullhorn"></i> Sigue el estado de tus reportes</li>
+            <li><i class="fa-solid fa-calculator"></i> Guarda tus presupuestos</li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="auth-form">
+        <h1>Iniciar sesión</h1>
+        <p class="auth-subtitle">Ingresa con el correo con el que te registraste.</p>
+
+        <form onsubmit="iniciarSesion(event)">
+          <div class="form-group">
+            <label for="loginEmail">Correo electrónico</label>
+            <div class="input-icon">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="loginEmail" class="form-control" placeholder="ejemplo@correo.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPass">Contraseña</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-lock"></i>
+              <input type="password" id="loginPass" class="form-control" placeholder="Tu contraseña" required autocomplete="current-password">
+              <button type="button" class="input-toggle" onclick="verClave(this, 'loginPass')" aria-label="Mostrar contraseña"><i class="fa-regular fa-eye"></i></button>
+            </div>
+          </div>
+
+          <div class="auth-row">
+            <label class="check-line"><input type="checkbox"> Recordarme</label>
+            <a href="#" onclick="alert('Te enviaremos un correo con un enlace para recuperar tu contraseña.'); return false;">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Ingresar <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <p class="auth-switch">¿No tienes cuenta? <a href="registro.html">Crea una gratis</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    async function iniciarSesion(e) {
+      e.preventDefault();
+      const form = e.target;
+      Huellitas.enviando(form, true);
+      try {
+        const { token, usuario } = await Huellitas.api('login', {
+          correo: document.getElementById('loginEmail').value,
+          contrasena: document.getElementById('loginPass').value,
+        });
+        Huellitas.iniciarSesion(usuario.correo, token);
+        const volver = new URLSearchParams(location.search).get('volver');
+        window.location.href = volver || 'perfil.html';
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+      }
+    }
+
+    function verClave(boton, id) {
+      const campo = document.getElementById(id);
+      const mostrar = campo.type === 'password';
+      campo.type = mostrar ? 'text' : 'password';
+      boton.innerHTML = `<i class="fa-regular fa-eye${mostrar ? '-slash' : ''}"></i>`;
+    }
+
+    document.querySelector('a[href="registro.html"]').href += location.search;
+  </script>
+</body>
+</html>

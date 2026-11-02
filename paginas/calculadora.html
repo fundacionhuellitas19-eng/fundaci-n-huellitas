@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Calculadora de Gastos — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-calculator"></i> Calculadora de gastos</span>
+      <h1>¿Cuánto cuesta cuidar bien a una mascota?</h1>
+      <p>Calcula el presupuesto mensual y anual para darle a tu perro o gato todo lo que necesita.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="calc-layout">
+
+      <div class="form-card">
+        <p class="field-label">¿Para quién es el cálculo?</p>
+        <div class="choice-cards choice-cards--two">
+          <label><input type="radio" name="especie" value="perro" checked onchange="cambiarEspecie('perro')"><span><i class="fa-solid fa-dog"></i><strong>Perro</strong></span></label>
+          <label><input type="radio" name="especie" value="gato" onchange="cambiarEspecie('gato')"><span><i class="fa-solid fa-cat"></i><strong>Gato</strong></span></label>
+        </div>
+
+        <p class="field-label">Gastos mensuales (en pesos)</p>
+        <div class="cost-list">
+          <label class="cost-row">
+            <span class="cost-icon"><i class="fa-solid fa-bowl-food"></i></span>
+            <span class="cost-name">Alimentación<small>Concentrado y premios</small></span>
+            <span class="cost-input">$<input type="number" id="comida" min="0" step="1000" oninput="calcular()"></span>
+          </label>
+          <label class="cost-row">
+            <span class="cost-icon"><i class="fa-solid fa-soap"></i></span>
+            <span class="cost-name" id="nombreHigiene">Higiene<small>Baño, champú y bolsas</small></span>
+            <span class="cost-input">$<input type="number" id="higiene" min="0" step="1000" oninput="calcular()"></span>
+          </label>
+          <label class="cost-row">
+            <span class="cost-icon"><i class="fa-solid fa-stethoscope"></i></span>
+            <span class="cost-name">Salud<small>Veterinario, vacunas y desparasitación</small></span>
+            <span class="cost-input">$<input type="number" id="salud" min="0" step="1000" oninput="calcular()"></span>
+          </label>
+          <label class="cost-row">
+            <span class="cost-icon"><i class="fa-solid fa-umbrella"></i></span>
+            <span class="cost-name">Accesorios e imprevistos<small>Juguetes, cama y ahorro para emergencias</small></span>
+            <span class="cost-input">$<input type="number" id="otros" min="0" step="1000" oninput="calcular()"></span>
+          </label>
+        </div>
+        <p class="field-hint"><i class="fa-solid fa-circle-info"></i> Los valores sugeridos son una referencia. Cámbialos según el tamaño, la edad y la salud de tu mascota.</p>
+      </div>
+
+      <aside class="calc-result">
+        <p class="calc-result-label">Gasto mensual estimado</p>
+        <p class="calc-result-total" id="txtMensual">$0</p>
+        <p class="calc-result-year">Al año: <strong id="txtAnual">$0</strong></p>
+
+        <div class="calc-bar" id="barra"></div>
+        <ul class="calc-legend" id="leyenda"></ul>
+
+        <button class="btn btn-primary btn-block" onclick="guardarPresupuesto()">
+          <i class="fa-solid fa-floppy-disk"></i> Guardar en mi perfil
+        </button>
+        <p class="calc-saved hidden" id="guardado"><i class="fa-solid fa-circle-check"></i> Guardado. Puedes verlo en <a href="perfil.html">Mi perfil</a>.</p>
+      </aside>
+    </div>
+
+    <section class="section-block">
+      <div class="section-header">
+        <span class="section-tag">No lo olvides</span>
+        <h2>Gastos iniciales al adoptar</h2>
+        <p>Además del gasto mensual, ten en cuenta estos costos de una sola vez.</p>
+      </div>
+      <div class="info-grid">
+        <article class="info-card">
+          <div class="service-icon"><i class="fa-solid fa-syringe"></i></div>
+          <h3>Vacunas y chequeo inicial</h3>
+          <p>Si adoptas en Fundación Huellitas, tu mascota llega vacunada, desparasitada y esterilizada.</p>
+        </article>
+        <article class="info-card">
+          <div class="service-icon service-icon--blue"><i class="fa-solid fa-bed"></i></div>
+          <h3>Cama, platos y transportadora</h3>
+          <p>Lo básico para que tenga su propio espacio y puedas llevarla al veterinario con seguridad.</p>
+        </article>
+        <article class="info-card">
+          <div class="service-icon service-icon--green"><i class="fa-solid fa-id-card"></i></div>
+          <h3>Collar y placa de identificación</h3>
+          <p>Con tu nombre y teléfono. Es la forma más rápida de que vuelva a casa si se pierde.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const SUGERIDOS = {
+      perro: { comida: 90000, higiene: 30000, salud: 35000, otros: 20000 },
+      gato:  { comida: 75000, higiene: 40000, salud: 30000, otros: 15000 },
+    };
+    const RUBROS = [
+      { id: 'comida', nombre: 'Alimentación', color: 'var(--color-primary)' },
+      { id: 'higiene', nombre: 'Higiene', color: 'var(--color-secondary)' },
+      { id: 'salud', nombre: 'Salud', color: 'var(--badge-adopt)' },
+      { id: 'otros', nombre: 'Accesorios', color: '#C99A6B' },
+    ];
+    const pesos = (n) => '$' + n.toLocaleString('es-CO');
+
+    function cambiarEspecie(especie) {
+      Object.entries(SUGERIDOS[especie]).forEach(([id, valor]) => document.getElementById(id).value = valor);
+      document.getElementById('nombreHigiene').innerHTML = especie === 'gato'
+        ? 'Higiene y arena<small>Arena sanitaria, champú y cepillo</small>'
+        : 'Higiene<small>Baño, champú y bolsas</small>';
+      calcular();
+    }
+
+    function calcular() {
+      const valores = RUBROS.map(r => ({ ...r, valor: Math.max(0, Number(document.getElementById(r.id).value) || 0) }));
+      const mensual = valores.reduce((suma, r) => suma + r.valor, 0);
+
+      document.getElementById('txtMensual').textContent = pesos(mensual);
+      document.getElementById('txtAnual').textContent = pesos(mensual * 12);
+
+      document.getElementById('barra').innerHTML = valores
+        .map(r => `<span style="width: ${mensual ? (r.valor / mensual) * 100 : 0}%; background: ${r.color};"></span>`).join('');
+      document.getElementById('leyenda').innerHTML = valores
+        .map(r => `<li><i style="background: ${r.color};"></i>${r.nombre}<strong>${pesos(r.valor)}</strong></li>`).join('');
+
+      document.getElementById('guardado').classList.add('hidden');
+      return mensual;
+    }
+
+    function guardarPresupuesto() {
+      if (!Huellitas.sesion()) {
+        location.href = 'login.html?volver=calculadora.html';
+        return;
+      }
+      const especie = document.querySelector('input[name="especie"]:checked').value;
+      const mensual = calcular();
+      const presupuestos = Huellitas.leer('huellitasPresupuestos');
+      presupuestos.push({ especie, mensual, fecha: new Date().toLocaleDateString('es-CO') });
+      Huellitas.guardar('huellitasPresupuestos', presupuestos);
+      document.getElementById('guardado').classList.remove('hidden');
+    }
+
+    cambiarEspecie('perro');
+  </script>
+</body>
+</html>

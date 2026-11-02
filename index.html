@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Fundación Huellitas — Rescate, Protección y Adopción</title>
+  
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <script src="js/componentes.js"></script>
+
+  <header class="hero" id="inicio">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <i class="fa-solid fa-heart"></i> Más de 450 vidas transformadas este año
+      </div>
+      <h1>
+        Devolviendo la esperanza a <span class="text-highlight">cada huella</span>
+      </h1>
+      <p>
+        Rescatamos animales en situación de calle o maltrato, les brindamos atención veterinaria, rehabilitación con amor y encontramos hogares definitivos que los valoren para siempre.
+      </p>
+      <div class="hero-buttons">
+        <a href="#casos" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-paw"></i> Quiero Adoptar
+        </a>
+        <a href="#donar" class="btn btn-secondary btn-lg">
+          <i class="fa-solid fa-heart"></i> Quiero Donar
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span><i class="fa-solid fa-circle-check"></i> Sin ánimo de lucro</span>
+        <span><i class="fa-solid fa-circle-check"></i> Animales vacunados y esterilizados</span>
+        <span><i class="fa-solid fa-circle-check"></i> Seguimiento post-adopción</span>
+      </div>
+    </div>
+
+    <div class="hero-image-wrapper">
+      <div class="hero-pets hero-pets--foto">
+        <img src="imagenes/portada-patitas.webp" alt="Una mano sostiene con cariño la pata de un perro y la de un gato" class="hero-pet">
+        <div class="hero-badge-floating">
+          <i class="fa-solid fa-paw"></i> Huellas que inspiran, acciones que protegen
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="stats-bar">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">1.240+</div>
+        <div class="stat-label">Rescates Exitosos</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">890</div>
+        <div class="stat-label">Adopciones Felices</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">145</div>
+        <div class="stat-label">Reencontrados con su Familia</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Voluntarios y Casas de Paso</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="nosotros">
+    <div class="about-grid">
+      <img src="https://images.unsplash.com/photo-1415369629372-26f2fe60c467?auto=format&fit=crop&q=80&w=900"
+           alt="Persona chocando la mano con la pata de un gato rescatado"
+           class="about-image"
+           onerror="this.onerror=null;this.src='imagenes/perro.angel.webp';">
+
+      <div class="about-text">
+        <span class="section-tag">Quiénes Somos</span>
+        <h2>Una herramienta digital al servicio de los animales</h2>
+        <p>
+          En Fundación Huellitas creemos que la tecnología puede salvar vidas. Por eso creamos una plataforma digital que da visibilidad a los animales que más lo necesitan y conecta a quienes quieren ayudar: personas que reportan un caso, familias que desean adoptar, donantes, voluntarios y aliados.
+        </p>
+        <p>
+          Desde cualquier celular o computador puedes conocer a nuestros animales, reportar un caso de maltrato o abandono y sumarte a la red. Así, cada huella deja de ser invisible.
+        </p>
+
+        <ul class="about-pillars">
+          <li>
+            <div class="pillar-icon"><i class="fa-solid fa-eye"></i></div>
+            <div>
+              <h3>Visibilidad para cada caso</h3>
+              <p>Publicamos los animales en adopción y los casos de rescate para que lleguen a más personas.</p>
+            </div>
+          </li>
+          <li>
+            <div class="pillar-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+            <div>
+              <h3>Ayuda que se conecta</h3>
+              <p>Reportes, adopciones, donaciones y voluntariado en un solo lugar, a pocos clics.</p>
+            </div>
+          </li>
+          <li>
+            <div class="pillar-icon"><i class="fa-solid fa-database"></i></div>
+            <div>
+              <h3>Información organizada</h3>
+              <p>Una base de datos registra cada animal, reporte y adopción para hacer seguimiento y no perder ningún caso.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="casos">
+    <div class="section-header">
+      <span class="section-tag">Red de Apoyo Activa</span>
+      <h2>Mural de Casos y Adopciones</h2>
+      <p>Cada uno tiene una historia. Conoce a quienes esperan un hogar, a quienes se recuperan con nuestro equipo y a los que su familia está buscando.</p>
+    </div>
+
+    <div class="filter-bar">
+      <button onclick="filterPets('all', this)" class="filter-btn active">Todos los Casos</button>
+      <button onclick="filterPets('adopcion', this)" class="filter-btn">
+        <i class="fa-solid fa-heart text-green"></i> Listos para Adopción
+      </button>
+      <button onclick="filterPets('recuperacion', this)" class="filter-btn">
+        <i class="fa-solid fa-kit-medical text-amber"></i> En Recuperación
+      </button>
+      <button onclick="filterPets('perdido', this)" class="filter-btn">
+        <i class="fa-solid fa-circle-exclamation text-red"></i> Perdidos / Búsqueda
+      </button>
+    </div>
+
+    <div class="pet-grid" id="muralCasos"></div>
+    <p class="swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Desliza para ver más</p>
+
+    <div class="mural-more">
+      <a href="paginas/adopcion.html" class="btn btn-secondary">
+        Ver todos los animales en adopción <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="adopta">
+    <div class="section-header">
+      <span class="section-tag">Transparencia y Cuidado</span>
+      <h2>¿Cómo adoptar a tu nuevo compañero?</h2>
+      <p>Nos aseguramos de que cada animalito llegue al hogar ideal, seguro y definitivo.</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Elige tu Mascota</h3>
+        <p>Revisa nuestro mural de rescatados, lee su temperamento e historia y escoge el que mejor combine contigo.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Llena el Formulario</h3>
+        <p>Cuéntanos sobre tu vivienda, rutina diaria, personas con las que convives y tu experiencia con mascotas.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Entrevista Virtual</h3>
+        <p>Conversaremos contigo para despejar inquietudes, explicar cuidados veterinarios y pactar visita de compatibilidad.</p>
+      </div>
+
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>¡Bienvenida a Casa!</h3>
+        <p>Formalizamos el acta de adopción y entregamos a tu nuevo amigo con acompañamiento veterinario permanente.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="testimonios">
+    <div class="section-header">
+      <span class="section-tag">Historias con Final Feliz</span>
+      <h2>Lo que dicen las familias que adoptaron</h2>
+      <p>Cada adopción es una vida que cambia, la del animal y la de su nueva familia.</p>
+    </div>
+
+    <div class="testimonial-grid">
+      <article class="testimonial-card">
+        <img src="https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?auto=format&fit=crop&q=80&w=600"
+             alt="Toby, perro adoptado, paseando con su familia" class="testimonial-img"
+             onerror="this.onerror=null;this.src='imagenes/perro.angel.webp';">
+        <div class="testimonial-body">
+          <div class="testimonial-stars" aria-label="5 de 5 estrellas">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-quote">“Toby llegó con miedo a todo. Hoy es el primero en recibirnos en la puerta. La fundación nos acompañó en cada paso, incluso después de la adopción.”</p>
+          <div class="testimonial-author">
+            <strong>Laura M.</strong>
+            <span>Adoptó a Toby &middot; Medellín</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <img src="https://images.unsplash.com/photo-1450778869180-41d0601e046e?auto=format&fit=crop&q=80&w=600"
+             alt="Nala, gata adoptada, jugando con el perro de la familia" class="testimonial-img"
+             onerror="this.onerror=null;this.src='imagenes/gato-gordo.jpg';">
+        <div class="testimonial-body">
+          <div class="testimonial-stars" aria-label="5 de 5 estrellas">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-quote">“Teníamos dudas de que Nala se llevara bien con nuestro perro. Nos asesoraron en la visita de compatibilidad y ahora son inseparables.”</p>
+          <div class="testimonial-author">
+            <strong>Andrés y Camila</strong>
+            <span>Adoptaron a Nala &middot; Bogotá</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="testimonial-card">
+        <img src="https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=600"
+          alt="Canela, perra adoptada, feliz en el campo" class="testimonial-img" onerror="this.onerror=null;this.src='imagenes/perro.angel.webp';">
+        <div class="testimonial-body">
+          <div class="testimonial-stars" aria-label="5 de 5 estrellas">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-quote">“Canela fue rescatada de la calle con una pata lastimada. Verla correr hoy en la finca no tiene precio. Adoptar fue la mejor decisión.”</p>
+          <div class="testimonial-author">
+            <strong>Don Jorge R.</strong>
+            <span>Adoptó a Canela &middot; Rionegro</span>
+          </div>
+        </div>
+      </article>
+    </div>
+    <p class="swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Desliza para ver más</p>
+  </section>
+
+  <section class="section section-alt" id="donar">
+    <div class="section-header">
+      <span class="section-tag">Tu Aporte Hace la Diferencia</span>
+      <h2>Ayúdanos a Seguir Salvando Vidas</h2>
+      <p>No contamos con financiamiento estatal fijo. Alimentamos, operamos y sanamos gracias a aportes solidarios como el tuyo.</p>
+    </div>
+
+    <div class="donation-grid">
+      <div class="donation-card" onclick="selectDonation(this, '50.000')">
+        <span class="donation-badge">Aporte Básico</span>
+        <div class="donation-amount">$50.000 <small>COP</small></div>
+        <p class="donation-desc">Alimento balanceado para un perro rescatado durante 2 semanas.</p>
+      </div>
+
+      <div class="donation-card active" onclick="selectDonation(this, '100.000')">
+        <span class="donation-badge">Más Elegido</span>
+        <div class="donation-amount">$100.000 <small>COP</small></div>
+        <p class="donation-desc">Vacunas completas, desparasitación y microchip para un rescatado.</p>
+      </div>
+
+      <div class="donation-card" onclick="selectDonation(this, '200.000')">
+        <span class="donation-badge">Padrino Quirúrgico</span>
+        <div class="donation-amount">$200.000 <small>COP</small></div>
+        <p class="donation-desc">Esterilización o cirugía de un animal rescatado de la calle.</p>
+      </div>
+    </div>
+
+    <div class="donation-cta">
+      <a id="donationBtn" href="#" target="_blank" class="btn btn-primary btn-lg">
+        <i class="fa-brands fa-whatsapp"></i> <span id="donationBtnText">Donar $100.000</span>
+      </a>
+      <div class="payment-methods">
+        <span class="payment-chip">Nequi</span>
+        <span class="payment-chip">Daviplata</span>
+        <span class="payment-chip">Bancolombia</span>
+        <span class="payment-chip">Transferencia</span>
+      </div>
+      <p class="donation-cta-note">
+        Te enviamos los datos de pago por WhatsApp. ¿Prefieres ayudar de otra forma?
+        <a href="paginas/donar.html">Conoce el voluntariado y las donaciones en especie</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="report-section" id="reportar-section">
+    <div class="report-info">
+      <div class="hero-tag" style="background: rgba(201, 154, 107, 0.2); color: #FFF; border-color: rgba(201, 154, 107, 0.4);">
+        Acción Rápida
+      </div>
+      <h2>¿Perdiste a tu mascota o viste un animal en riesgo?</h2>
+      <p>
+        El tiempo es crítico. Publica el caso inmediatamente para que nuestra red de voluntarios y clínicas aliadas inicien la búsqueda y auxilio.
+      </p>
+      <ul class="report-bullets">
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Publicación automática en el mural de casos activos</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Alerta enviada a veterinarias y rescatistas zonales</span>
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check"></i>
+          <span>Difusión comunitaria en redes oficiales</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="report-form-card">
+      <h3>Reportar un caso ahora</h3>
+      <form onsubmit="handleReportSubmit(event)">
+        <div class="form-group">
+          <label>Tipo de Reporte</label>
+          <select class="form-control" required>
+            <option value="perdido">Mascota Perdida (Busco a mi dueño)</option>
+            <option value="encontrado">Encontré un animal en la calle</option>
+            <option value="urgencia">Urgencia Médica / Posible Maltrato</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Tu Nombre</label>
+            <input type="text" class="form-control" placeholder="Ej. Ana Gómez" required>
+          </div>
+          <div class="form-group">
+            <label>Teléfono / WhatsApp</label>
+            <input type="tel" class="form-control" placeholder="Ej. 300 123 4567" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Ubicación o Barrio</label>
+          <input type="text" class="form-control" placeholder="Barrio, cruce de calles o localidad" required>
+        </div>
+
+        <div class="form-group">
+          <label>Detalles del Animal</label>
+          <textarea class="form-control" rows="3" placeholder="Raza, color de pelaje, si tiene collar, estado físico..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">
+          <i class="fa-solid fa-paper-plane"></i> Enviar Reporte Inmediato
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <div id="detailModal" class="modal-backdrop hidden" onclick="closeModalOnBackdrop(event)">
+    <div class="modal-box" onclick="event.stopPropagation()">
+      <button class="modal-close-btn" onclick="closeModal('detailModal')" aria-label="Cerrar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div class="modal-image-area">
+        <img id="modalImg" alt="Foto del animal">
+      </div>
+
+      <div class="modal-content-area">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+          <h3 id="modalTitle">Nombre</h3>
+          <span id="modalBadge" class="pet-status-badge" style="position: static;">Estado</span>
+        </div>
+        <p id="modalDesc">Descripción completa de la mascota.</p>
+
+        <div class="modal-extra-box">
+          <i class="fa-solid fa-info-circle"></i>
+          <span id="modalExtra">Información</span>
+        </div>
+
+        <div class="modal-actions">
+          <button onclick="closeModal('detailModal')" class="btn btn-secondary" style="flex: 1;">Cerrar</button>
+          <a id="modalContactBtn" href="#" target="_blank" class="btn btn-primary" style="flex: 1;">
+            <i class="fa-brands fa-whatsapp"></i> <span id="modalContactText">Contactar</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast-pill">
+    <i class="fa-solid fa-circle-check"></i>
+    <span id="toastMessage">Operación completada con éxito.</span>
+  </div>
+
+  <script>
+    const casos = [
+      {
+        nombre: 'Mona', estado: 'adopcion', foto: 'imagenes/mural/mona.webp',
+        alt: 'Mona, gata carey rescatada, descansando sobre una cobija',
+        sexo: 'Hembra', edad: '4 años', tamano: 'Mediana', especie: 'gato',
+        lugar: 'Rescatada en Bello',
+        resumen: 'Llegó flaca y asustada a un parqueadero de Bello. Hoy es una gata tranquila que ama las cobijas y las siestas al sol.',
+        historia: 'Mona vivió varios meses en un parqueadero, donde los vigilantes le daban comida. Llegó a la fundación con bajo peso y una infección en los ojos que ya sanó. Es calmada, le gustan los mimos y se adapta bien a un apartamento. Ideal para una familia tranquila.',
+        salud: ['Vacunada', 'Esterilizada', 'Desparasitada'],
+        espera: 64
+      },
+      {
+        nombre: 'Tobías', estado: 'recuperacion', foto: 'imagenes/mural/tobias.webp',
+        alt: 'Tobías, perro criollo negro y café, descansando al sol',
+        sexo: 'Macho', edad: '6 años', tamano: 'Mediano', especie: 'perro',
+        lugar: 'Hogar de paso · Envigado',
+        resumen: 'Lo encontraron atropellado en una vía de Envigado. Después de la cirugía de cadera ya da sus primeros pasos y mueve la cola cada mañana.',
+        historia: 'Tobías fue operado de la cadera en una clínica aliada y ahora se recupera en un hogar de paso. Necesita sesiones de fisioterapia y medicamentos durante dos meses más. Con tu aporte puede volver a correr y luego buscar una familia.',
+        salud: ['Operado', 'Vacunado', 'En fisioterapia'],
+        meta: { para: 'Fisioterapia y medicamentos', recaudado: 520000, objetivo: 800000 }
+      },
+      {
+        nombre: 'Coco', estado: 'perdido', foto: 'imagenes/mural/coco.webp',
+        alt: 'Coco, perro criollo atigrado con pecho blanco, acostado en el pasto',
+        sexo: 'Macho', edad: '2 años', tamano: 'Mediano', especie: 'perro',
+        visto: '24 de octubre · Robledo, Medellín',
+        resumen: 'Criollo atigrado con pecho y patas blancas. Es amistoso, pero se asusta con la pólvora y salió corriendo de su casa.',
+        historia: 'Coco se escapó la noche del 24 de octubre por el ruido de la pólvora. Es muy sociable, se acerca si lo llamas por su nombre y no tiene collar. Su familia lo busca en Robledo y los barrios cercanos. Si lo ves, escríbenos con la foto y el lugar.'
+      },
+      {
+        nombre: 'Lucas', estado: 'adopcion', foto: 'imagenes/mural/lucas.webp',
+        alt: 'Lucas, perro mestizo gris, asomado por encima de una reja del refugio',
+        sexo: 'Macho', edad: '1 año', tamano: 'Grande', especie: 'perro',
+        lugar: 'Rescatado en Itagüí',
+        resumen: 'Lo abandonaron amarrado a una reja. Es noble, juguetón y aprende rápido; busca una familia con patio o paseos diarios.',
+        historia: 'Lucas fue encontrado amarrado a la reja de un lote en Itagüí, sin agua ni comida. En el refugio aprendió a caminar con correa y a sentarse cuando se lo piden. Se lleva bien con otros perros y con niños grandes. Necesita espacio y mucho juego.',
+        salud: ['Vacunado', 'Esterilizado', 'Desparasitado'],
+        espera: 112
+      },
+      {
+        nombre: 'Mila', estado: 'recuperacion', foto: 'imagenes/mural/mila.webp',
+        alt: 'Mila, gatita gris con cono veterinario, mirando por la ventana',
+        sexo: 'Hembra', edad: '5 meses', tamano: 'Pequeña', especie: 'gato',
+        lugar: 'Hogar de paso · Sabaneta',
+        resumen: 'La rescataron de una alcantarilla con una herida en el cuello. Usa cono mientras cicatriza y pronto estará lista para adopción.',
+        historia: 'Mila pasó dos días atrapada en una alcantarilla de Sabaneta hasta que unos vecinos la escucharon. La herida del cuello ya está cerrando y come muy bien. Le faltan curaciones y la última vacuna. Puedes apoyarla o postularte desde ya como pre-adoptante.',
+        salud: ['En curaciones', 'Desparasitada'],
+        meta: { para: 'Curaciones y vacunas', recaudado: 180000, objetivo: 300000 }
+      },
+      {
+        nombre: 'Simón', estado: 'perdido', foto: 'imagenes/mural/simon.webp',
+        alt: 'Simón, gato atigrado con collar rojo, sobre la baranda de un balcón',
+        sexo: 'Macho', edad: '1 año', tamano: 'Pequeño', especie: 'gato',
+        visto: '27 de octubre · Laureles, Medellín',
+        resumen: 'Gato atigrado con collar rojo. Es curioso, le gusta subirse a los balcones y su familia lo busca desde el lunes.',
+        historia: 'Simón salió por la ventana de su apartamento en Laureles y no ha vuelto. Lleva un collar rojo sin placa. Es tímido con los extraños, así que si lo ves no lo persigas: toma una foto, anota la dirección y escríbenos.'
+      }
+    ];
+
+    const ESTADOS = {
+      adopcion:     { texto: 'En Adopción',     clase: 'badge-adopcion' },
+      recuperacion: { texto: 'En Recuperación', clase: 'badge-recuperacion' },
+      perdido:      { texto: 'Perdido',         clase: 'badge-perdido' }
+    };
+
+    const pesos = valor => '$' + valor.toLocaleString('es-CO');
+
+    function detalleCaso(c) {
+      if (c.estado === 'adopcion') {
+        return `<p class="pet-waiting"><i class="fa-regular fa-clock"></i> <span>Lleva <strong>${c.espera} días</strong> esperando una familia</span></p>`;
+      }
+      if (c.estado === 'recuperacion') {
+        const porcentaje = Math.round(c.meta.recaudado / c.meta.objetivo * 100);
+        return `
+          <div class="pet-goal">
+            <div class="pet-goal-text"><span>${c.meta.para}</span><strong>${porcentaje}%</strong></div>
+            <div class="pet-goal-bar"><span style="width: ${porcentaje}%"></span></div>
+            <small>${pesos(c.meta.recaudado)} de ${pesos(c.meta.objetivo)}</small>
+          </div>`;
+      }
+      return `<p class="pet-seen"><i class="fa-solid fa-location-dot"></i> <span>Visto por última vez: <strong>${c.visto}</strong></span></p>`;
+    }
+
+    function dibujarMural() {
+      const textoBoton = {
+        adopcion: c => `<i class="fa-solid fa-heart"></i> Quiero adoptar${c.sexo === 'Hembra' ? 'la' : 'lo'}`,
+        recuperacion: c => `<i class="fa-solid fa-hand-holding-heart"></i> Apoyar a ${c.nombre}`,
+        perdido: () => `<i class="fa-solid fa-eye"></i> Lo he visto`
+      };
+      document.getElementById('muralCasos').innerHTML = casos.map((c, i) => `
+        <div class="pet-card" data-category="${c.estado}">
+          <div class="pet-img-container">
+            <span class="pet-status-badge ${ESTADOS[c.estado].clase}">${ESTADOS[c.estado].texto}</span>
+            <img src="${c.foto}" alt="${c.alt}" loading="lazy">
+          </div>
+          <div class="pet-body">
+            <div>
+              <div class="pet-title-row">
+                <h3 class="pet-name">${c.nombre}</h3>
+                <span class="pet-tag-zone">${c.sexo} &middot; ${c.edad}</span>
+              </div>
+              <p class="pet-facts">
+                <span><i class="fa-solid fa-${c.especie === 'perro' ? 'dog' : 'cat'}"></i> ${c.tamano}</span>
+                ${c.lugar ? `<span><i class="fa-solid fa-location-dot"></i> ${c.lugar}</span>` : ''}
+              </p>
+              <p class="pet-desc">${c.resumen}</p>
+              ${c.salud ? `<ul class="pet-traits">${c.salud.map(s => `<li><i class="fa-solid fa-check"></i> ${s}</li>`).join('')}</ul>` : ''}
+              ${detalleCaso(c)}
+            </div>
+            <button onclick="openDetailModal(${i})" class="btn ${c.estado === 'adopcion' ? 'btn-primary' : 'btn-secondary'} btn-block btn-sm">
+              ${textoBoton[c.estado](c)}
+            </button>
+          </div>
+        </div>`).join('');
+    }
+    dibujarMural();
+
+    function filterPets(category, clickedBtn) {
+      const cards = document.querySelectorAll('.pet-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+
+      buttons.forEach(btn => btn.classList.remove('active'));
+      if (clickedBtn) clickedBtn.classList.add('active');
+
+      cards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    function openDetailModal(i) {
+      const c = casos[i];
+      const name = c.nombre;
+      document.getElementById('modalTitle').innerText = name;
+
+      const badge = document.getElementById('modalBadge');
+      badge.innerText = ESTADOS[c.estado].texto;
+      badge.className = 'pet-status-badge ' + ESTADOS[c.estado].clase;
+
+      document.getElementById('modalDesc').innerText = c.historia;
+      document.getElementById('modalImg').src = c.foto;
+      document.getElementById('modalImg').alt = c.alt;
+
+      let extra = `${c.sexo} · ${c.edad} · ${c.tamano}` + (c.salud ? ' · ' + c.salud.join(', ') : '');
+      let texto = 'Quiero adoptar';
+      let mensaje = `Hola, quiero adoptar a ${name} 🐾 ¿Qué debo hacer?`;
+      if (c.estado === 'perdido') {
+        extra = `Visto por última vez: ${c.visto}`;
+        texto = 'Tengo información';
+        mensaje = `Hola, tengo información sobre ${name}, que aparece como perdido en la página.`;
+      } else if (c.estado === 'recuperacion') {
+        extra = `${c.meta.para}: ${pesos(c.meta.recaudado)} de ${pesos(c.meta.objetivo)} recaudados`;
+        texto = 'Quiero ayudar';
+        mensaje = `Hola, quiero apoyar la recuperación de ${name}. ¿Cómo puedo ayudar?`;
+      }
+      document.getElementById('modalExtra').innerText = extra;
+      document.getElementById('modalContactText').innerText = texto;
+      document.getElementById('modalContactBtn').href = whatsappLink(mensaje);
+
+      document.getElementById('detailModal').classList.remove('hidden');
+    }
+
+    function whatsappLink(mensaje) {
+      return 'https://wa.me/573024338944?text=' + encodeURIComponent(mensaje);
+    }
+
+    function closeModal(modalId) {
+      document.getElementById(modalId).classList.add('hidden');
+    }
+
+    function closeModalOnBackdrop(e) {
+      if (e.target.id === 'detailModal') {
+        closeModal('detailModal');
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal('detailModal');
+    });
+
+    function handleReportSubmit(e) {
+      e.preventDefault();
+      showNotification('¡Reporte enviado! Nuestro equipo lo revisará en breve.');
+      e.target.reset();
+    }
+
+    let toastTimer;
+    function showNotification(msg) {
+      const toast = document.getElementById('toast');
+      const msgEl = document.getElementById('toastMessage');
+      msgEl.innerText = msg;
+      toast.classList.add('show');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 4000);
+    }
+
+    function selectDonation(el, amount) {
+      document.querySelectorAll('.donation-card').forEach(card => card.classList.remove('active'));
+      el.classList.add('active');
+      document.getElementById('donationBtnText').innerText = `Donar $${amount}`;
+      document.getElementById('donationBtn').href =
+        whatsappLink(`Hola, quiero donar $${amount} COP a Fundación Huellitas 🐾 ¿Me envían los datos de pago?`);
+    }
+
+    selectDonation(document.querySelector('.donation-card.active'), '100.000');
+  </script>
+</body>
+</html>

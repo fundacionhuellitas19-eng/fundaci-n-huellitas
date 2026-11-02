@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Reportar un Caso — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-bullhorn"></i> Reportar un caso</span>
+      <h1>Reporta un animal en riesgo</h1>
+      <p>Cuéntanos qué viste y dónde. Nuestro equipo evalúa cada reporte y activa la red de voluntarios y clínicas aliadas.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <div class="alert-bar">
+      <div class="alert-bar-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <div class="alert-bar-text">
+        <strong>¿El animal está en peligro inmediato o hay maltrato en curso?</strong>
+        <span>No esperes: llama a la Línea 123 de la Policía o escríbenos por WhatsApp.</span>
+      </div>
+      <div class="alert-bar-actions">
+        <a href="tel:123" class="btn btn-sm btn-danger"><i class="fa-solid fa-phone"></i> Llamar al 123</a>
+        <a href="https://wa.me/573024338944?text=Hola%2C%20tengo%20una%20emergencia%20con%20un%20animal." target="_blank" class="btn btn-sm btn-secondary"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+      </div>
+    </div>
+
+    <div class="report-layout">
+
+      <div class="form-card">
+        <form id="formReporte" onsubmit="procesarReporte(event)">
+
+          <div class="form-step">
+            <h2><span class="form-step-num">1</span> ¿Qué está pasando?</h2>
+
+            <p class="field-label">Tipo de animal</p>
+            <div class="choice-chips">
+              <label><input type="radio" name="animal" value="Perro" required><span><i class="fa-solid fa-dog"></i> Perro</span></label>
+              <label><input type="radio" name="animal" value="Gato"><span><i class="fa-solid fa-cat"></i> Gato</span></label>
+              <label><input type="radio" name="animal" value="Animal silvestre"><span><i class="fa-solid fa-feather"></i> Silvestre</span></label>
+              <label><input type="radio" name="animal" value="Otro"><span><i class="fa-solid fa-paw"></i> Otro</span></label>
+            </div>
+
+            <p class="field-label">Situación</p>
+            <div class="choice-cards">
+              <label><input type="radio" name="situacion" value="Animal herido o enfermo" required><span><i class="fa-solid fa-kit-medical"></i><strong>Herido o enfermo</strong></span></label>
+              <label><input type="radio" name="situacion" value="Maltrato o crueldad"><span><i class="fa-solid fa-hand"></i><strong>Maltrato</strong></span></label>
+              <label><input type="radio" name="situacion" value="Abandono"><span><i class="fa-solid fa-box-open"></i><strong>Abandono</strong></span></label>
+              <label><input type="radio" name="situacion" value="Animal perdido"><span><i class="fa-solid fa-magnifying-glass"></i><strong>Perdido</strong></span></label>
+              <label><input type="radio" name="situacion" value="Situación de peligro"><span><i class="fa-solid fa-car-burst"></i><strong>En peligro</strong></span></label>
+              <label><input type="radio" name="situacion" value="Otro caso"><span><i class="fa-solid fa-ellipsis"></i><strong>Otro</strong></span></label>
+            </div>
+            <p class="field-hint hidden" id="avisoSilvestre">
+              <i class="fa-solid fa-leaf"></i> Para fauna silvestre también puedes contactar a la autoridad ambiental de tu región. <a href="emergencias.html">Ver directorio</a>
+            </p>
+
+            <div class="form-group">
+              <label for="descripcion">Describe lo que viste</label>
+              <textarea id="descripcion" class="form-control" rows="4" required placeholder="Estado del animal, color, tamaño, si tiene collar, desde cuándo está ahí..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-step">
+            <h2><span class="form-step-num">2</span> ¿Dónde está?</h2>
+            <div class="form-group">
+              <label for="ubicacion">Dirección o punto de referencia</label>
+              <div class="input-with-button">
+                <input type="text" id="ubicacion" class="form-control" required placeholder="Ej: Calle 45 # 12-34, frente al parque, Bello">
+                <button type="button" class="btn btn-secondary btn-sm" onclick="usarUbicacion(this)">
+                  <i class="fa-solid fa-location-crosshairs"></i> Mi ubicación
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Foto del animal (opcional)</label>
+              <label class="file-drop" id="fileDrop">
+                <input type="file" id="foto" accept="image/*" onchange="mostrarFoto(this)">
+                <span class="file-drop-empty">
+                  <i class="fa-solid fa-camera"></i>
+                  <strong>Toca para subir una foto</strong>
+                  <small>Ayuda a identificar al animal y evaluar la urgencia</small>
+                </span>
+                <img id="fotoPreview" class="hidden" alt="Vista previa de la foto">
+              </label>
+            </div>
+          </div>
+
+          <div class="form-step">
+            <h2><span class="form-step-num">3</span> Tus datos de contacto</h2>
+
+            <label class="switch-line">
+              <input type="checkbox" id="checkAnonimo" onchange="toggleDatosPersonales()">
+              <span class="switch"></span>
+              Prefiero hacer el reporte de forma anónima
+            </label>
+
+            <div id="bloquePersonales">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" class="form-control" placeholder="Tu nombre">
+                </div>
+                <div class="form-group">
+                  <label for="telefono">Teléfono / WhatsApp</label>
+                  <input type="tel" id="telefono" class="form-control" placeholder="Ej: 300 123 4567">
+                </div>
+              </div>
+              <p class="field-hint"><i class="fa-solid fa-lock"></i> Solo usamos tus datos para pedirte más información del caso.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <i class="fa-solid fa-paper-plane"></i> Enviar reporte
+          </button>
+        </form>
+
+        <div id="reporteEnviado" class="form-success hidden">
+          <div class="modal-icon modal-icon--ok"><i class="fa-solid fa-circle-check"></i></div>
+          <h2>¡Reporte recibido!</h2>
+          <p>Tu número de caso es</p>
+          <p class="case-number" id="numeroCaso">#HU-0000</p>
+          <p>Nuestro equipo lo revisará en las próximas horas. Si dejaste tu teléfono, te escribiremos para contarte cómo va.</p>
+          <div class="test-result-actions">
+            <button class="btn btn-secondary" onclick="nuevoReporte()">Hacer otro reporte</button>
+            <a href="../index.html" class="btn btn-primary">Volver al inicio</a>
+          </div>
+        </div>
+      </div>
+
+      <aside class="report-aside">
+        <div class="side-card">
+          <h3>¿Qué pasa después?</h3>
+          <ol class="timeline">
+            <li><strong>Recibimos tu reporte</strong><span>Queda registrado con un número de caso.</span></li>
+            <li><strong>Evaluamos la urgencia</strong><span>Clasificamos el caso como leve, medio o urgente.</span></li>
+            <li><strong>Activamos la red</strong><span>Voluntarios y clínicas aliadas cercanas acuden al lugar.</span></li>
+            <li><strong>Te mantenemos informado</strong><span>Si dejaste tus datos, te contamos cómo terminó.</span></li>
+          </ol>
+        </div>
+
+        <div class="side-card side-card--soft">
+          <h3><i class="fa-solid fa-lightbulb"></i> Mientras llega ayuda</h3>
+          <ul class="tips-list">
+            <li>Mantén distancia si el animal está asustado o agresivo.</li>
+            <li>Ofrécele agua, nunca comida de humanos.</li>
+            <li>Si está herido, no lo muevas a menos que corra peligro.</li>
+            <li>Toma fotos y anota la dirección exacta.</li>
+          </ul>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    function toggleDatosPersonales() {
+      document.getElementById('bloquePersonales').classList.toggle('hidden', document.getElementById('checkAnonimo').checked);
+    }
+
+    document.querySelectorAll('input[name="animal"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        document.getElementById('avisoSilvestre').classList.toggle('hidden', radio.value !== 'Animal silvestre');
+      });
+    });
+
+    function usarUbicacion(boton) {
+      if (!navigator.geolocation) {
+        alert('Tu navegador no permite obtener la ubicación. Escribe la dirección, por favor.');
+        return;
+      }
+      boton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
+      navigator.geolocation.getCurrentPosition(
+        pos => {
+          const { latitude, longitude } = pos.coords;
+          document.getElementById('ubicacion').value = `Coordenadas: ${latitude.toFixed(5)}, ${longitude.toFixed(5)}`;
+          boton.innerHTML = '<i class="fa-solid fa-check"></i> Listo';
+        },
+        () => {
+          alert('No pudimos obtener tu ubicación. Escribe la dirección o un punto de referencia.');
+          boton.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Mi ubicación';
+        }
+      );
+    }
+
+    function mostrarFoto(input) {
+      const preview = document.getElementById('fotoPreview');
+      const vacio = document.querySelector('.file-drop-empty');
+      if (input.files && input.files[0]) {
+        preview.src = URL.createObjectURL(input.files[0]);
+        preview.classList.remove('hidden');
+        vacio.classList.add('hidden');
+      }
+    }
+
+    async function procesarReporte(event) {
+      event.preventDefault();
+      const form = event.target;
+      const anonimo = document.getElementById('checkAnonimo').checked;
+      const reporte = {
+        animal: form.animal.value,
+        situacion: form.situacion.value,
+        descripcion: document.getElementById('descripcion').value,
+        ubicacion: document.getElementById('ubicacion').value,
+        anonimo,
+        nombre: anonimo ? '' : document.getElementById('nombre').value,
+        telefono: anonimo ? '' : document.getElementById('telefono').value,
+      };
+
+      Huellitas.enviando(form, true);
+      let numero;
+      try {
+        ({ numero } = await Huellitas.api('reportes', reporte));
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+        return;
+      }
+      Huellitas.enviando(form, false);
+
+      if (Huellitas.sesion()) {
+        const reportes = Huellitas.leer('huellitasReportes');
+        reportes.push({ numero, situacion: reporte.situacion, animal: reporte.animal, ubicacion: reporte.ubicacion,
+                        fecha: new Date().toLocaleDateString('es-CO'), estado: 'En verificación' });
+        Huellitas.guardar('huellitasReportes', reportes);
+      }
+
+      document.getElementById('numeroCaso').textContent = numero;
+      form.classList.add('hidden');
+      document.getElementById('reporteEnviado').classList.remove('hidden');
+      document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function nuevoReporte() {
+      const form = document.getElementById('formReporte');
+      form.reset();
+      document.getElementById('fotoPreview').classList.add('hidden');
+      document.querySelector('.file-drop-empty').classList.remove('hidden');
+      document.getElementById('avisoSilvestre').classList.add('hidden');
+      toggleDatosPersonales();
+      form.classList.remove('hidden');
+      document.getElementById('reporteEnviado').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Encuesta Comunitaria — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-square-poll-vertical"></i> Encuesta comunitaria</span>
+      <h1>Tu opinión mejora nuestros programas</h1>
+      <p>5 preguntas sobre abandono, esterilización y protección animal. Responder toma menos de un minuto.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="survey-box">
+
+      <div class="survey-progress">
+        <span id="progresoTexto">0 de 5 respondidas</span>
+        <div class="survey-progress-bar"><i id="progresoBarra"></i></div>
+      </div>
+
+      <form id="formEncuesta" onsubmit="enviarEncuesta(event)">
+        <ol class="test-questions" id="preguntas"></ol>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">
+          <i class="fa-solid fa-paper-plane"></i> Enviar mis respuestas
+        </button>
+      </form>
+
+      <div id="panelResultados" class="hidden">
+        <div class="form-success">
+          <div class="modal-icon modal-icon--ok"><i class="fa-solid fa-circle-check"></i></div>
+          <h2>¡Gracias por participar!</h2>
+          <p>Así ha respondido la comunidad (<strong id="totalParticipantes"></strong> participantes). Tu respuesta está resaltada.</p>
+        </div>
+        <div id="resultados" class="survey-results"></div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const PREGUNTAS = [
+      {
+        texto: '¿Cuál crees que es la causa más frecuente del abandono animal?',
+        opciones: [
+          { texto: 'Problemas económicos', base: 34 },
+          { texto: 'Camadas no planificadas', base: 41 },
+          { texto: 'Mudanzas o cambios de vivienda', base: 18 },
+          { texto: 'Falta de tiempo o paciencia', base: 22 },
+          { texto: 'Falta de información', base: 15 },
+        ],
+      },
+      {
+        texto: '¿Consideras importante esterilizar a los animales de compañía?',
+        opciones: [
+          { texto: 'Sí, es indispensable', base: 112 },
+          { texto: 'No lo considero prioritario', base: 6 },
+          { texto: 'No estoy seguro', base: 12 },
+        ],
+      },
+      {
+        texto: '¿Conoces el esquema de vacunación de tu mascota?',
+        opciones: [
+          { texto: 'Sí, está al día', base: 71 },
+          { texto: 'Solo las vacunas iniciales', base: 33 },
+          { texto: 'No lo conozco o no tengo mascota', base: 26 },
+        ],
+      },
+      {
+        texto: '¿Sabrías qué hacer si encuentras un animal silvestre herido?',
+        opciones: [
+          { texto: 'Sí, llamar a la autoridad ambiental', base: 48 },
+          { texto: 'No sabría a quién llamar', base: 61 },
+          { texto: 'Intentaría cuidarlo en casa', base: 21 },
+        ],
+      },
+      {
+        texto: '¿Crees que la ciudadanía conoce las leyes de protección animal, como la Ley Ángel?',
+        opciones: [
+          { texto: 'Sí, la mayoría las conoce', base: 9 },
+          { texto: 'Parcialmente, falta pedagogía', base: 64 },
+          { texto: 'No, casi nadie las conoce', base: 57 },
+        ],
+      },
+    ];
+
+    document.getElementById('preguntas').innerHTML = PREGUNTAS.map((p, i) => `
+      <li>
+        <p>${p.texto}</p>
+        <div class="survey-options">
+          ${p.opciones.map((o, j) => `
+            <label><input type="radio" name="p${i}" value="${j}" required onchange="actualizarProgreso()"><span>${o.texto}</span></label>
+          `).join('')}
+        </div>
+      </li>`).join('');
+
+    function actualizarProgreso() {
+      const respondidas = PREGUNTAS.filter((_, i) => document.querySelector(`input[name="p${i}"]:checked`)).length;
+      document.getElementById('progresoTexto').textContent = `${respondidas} de ${PREGUNTAS.length} respondidas`;
+      document.getElementById('progresoBarra').style.width = (respondidas / PREGUNTAS.length * 100) + '%';
+    }
+
+    async function enviarEncuesta(e) {
+      e.preventDefault();
+      const form = e.target;
+      const mias = PREGUNTAS.map((_, i) => Number(document.querySelector(`input[name="p${i}"]:checked`).value));
+
+      Huellitas.enviando(form, true);
+      let guardado;
+      try {
+        guardado = await Huellitas.api('encuesta', { respuestas: mias });
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+        return;
+      }
+      Huellitas.enviando(form, false);
+
+      const enLinea = (i, j) => (guardado.conteos.find(c => c.pregunta === i && c.opcion === j) || { total: 0 }).total;
+      const totalBase = PREGUNTAS[0].opciones.reduce((s, o) => s + o.base, 0);
+      document.getElementById('totalParticipantes').textContent = totalBase + guardado.participantes;
+
+      document.getElementById('resultados').innerHTML = PREGUNTAS.map((p, i) => {
+        const conteos = p.opciones.map((o, j) => o.base + enLinea(i, j));
+        const total = conteos.reduce((s, n) => s + n, 0);
+        return `
+          <div class="survey-result">
+            <h3>${i + 1}. ${p.texto}</h3>
+            ${p.opciones.map((o, j) => {
+              const pct = Math.round(conteos[j] / total * 100);
+              return `
+                <div class="survey-bar${mias[i] === j ? ' survey-bar--mine' : ''}">
+                  <div><span>${o.texto}${mias[i] === j ? ' <em>· Tu respuesta</em>' : ''}</span><strong>${pct}%</strong></div>
+                  <i style="--valor: ${pct}%"></i>
+                </div>`;
+            }).join('')}
+          </div>`;
+      }).join('');
+
+      e.target.classList.add('hidden');
+      document.querySelector('.survey-progress').classList.add('hidden');
+      document.getElementById('panelResultados').classList.remove('hidden');
+      document.querySelector('.survey-box').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>

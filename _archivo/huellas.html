@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundación Huellas de Amor - Rescate y Adopción Animal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf4ed',
+                            100: '#fbe8d5',
+                            500: '#e07a5f',
+                            600: '#c85d3f',
+                            700: '#a3482f',
+                        },
+                        forest: {
+                            600: '#3d5a80',
+                            700: '#293241',
+                            800: '#1d232a',
+                        },
+                        sand: {
+                            100: '#f4f1de',
+                            200: '#e9e4c9'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f4f1de;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #e07a5f;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="bg-sand-100 text-forest-700 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-full bg-brand-500 flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-paw"></i>
+                </div>
+                <div>
+                    <span class="text-xl font-bold tracking-tight text-forest-700 block leading-tight">Huellas de Amor</span>
+                    <span class="text-xs font-medium text-brand-600 tracking-wider uppercase">Fundación de Rescate</span>
+                </div>
+            </a>
+            
+            <nav class="hidden md:flex items-center gap-8 font-medium text-sm">
+                <a href="#inicio" class="hover:text-brand-500 transition-colors">Inicio</a>
+                <a href="#casos" class="hover:text-brand-500 transition-colors">Casos Activos</a>
+                <a href="#adopta" class="hover:text-brand-500 transition-colors">Adopciones</a>
+                <a href="#reportar" class="hover:text-brand-500 transition-colors">Reportar Perdido</a>
+                <a href="#donar" class="hover:text-brand-500 transition-colors">Donar</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-full border border-forest-600/30 text-forest-700 hover:bg-forest-600 hover:text-white transition-all">
+                    <i class="fa-solid fa-arrow-left"></i> Volver a Huellitas
+                </a>
+                <button onclick="openModal('reportModal')" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-full bg-forest-600 text-white hover:bg-forest-700 shadow-sm transition-all">
+                    <i class="fa-solid fa-bullhorn"></i> Reportar Animal
+                </button>
+                <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-forest-700 focus:outline-none" aria-label="Abrir menú">
+                    <i class="fa-solid fa-bars" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 px-6 py-4 space-y-3 shadow-lg">
+            <a href="#inicio" onclick="toggleMobileMenu()" class="block font-medium text-forest-700 hover:text-brand-500">Inicio</a>
+            <a href="#casos" onclick="toggleMobileMenu()" class="block font-medium text-forest-700 hover:text-brand-500">Casos Activos</a>
+            <a href="#adopta" onclick="toggleMobileMenu()" class="block font-medium text-forest-700 hover:text-brand-500">Adopciones</a>
+            <a href="#reportar" onclick="toggleMobileMenu()" class="block font-medium text-forest-700 hover:text-brand-500">Reportar Perdido</a>
+            <a href="#donar" onclick="toggleMobileMenu()" class="block font-medium text-forest-700 hover:text-brand-500">Donar</a>
+            <button onclick="openModal('reportModal'); toggleMobileMenu();" class="w-full text-center py-2 bg-forest-600 text-white rounded-full font-semibold">
+                Reportar Animal
+            </button>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative overflow-hidden py-16 lg:py-24 bg-gradient-to-b from-sand-100 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6 text-center lg:text-left">
+                <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-brand-100 text-brand-700">
+                    <i class="fa-solid fa-heart text-brand-500"></i> Más de 450 vidas transformadas este año
+                </span>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-forest-700 tracking-tight leading-tight">
+                    Devolviendo la esperanza a <span class="text-brand-500">cada huella</span>
+                </h1>
+                <p class="text-lg text-gray-600 max-w-xl mx-auto lg:mx-0">
+                    Rescatamos animales en situación de calle o maltrato, les brindamos rehabilitación médica, amor incondicional y buscamos familias que los amen para siempre.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#adopta" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-brand-500 text-white font-semibold shadow-lg shadow-brand-500/30 hover:bg-brand-600 hover:shadow-xl transition-all text-center">
+                        Quiero Adoptar
+                    </a>
+                    <a href="#casos" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-white border border-gray-300 text-forest-700 font-semibold hover:bg-gray-50 transition-all text-center">
+                        Ver Casos de Perdidos
+                    </a>
+                </div>
+            </div>
+            
+            <div class="relative">
+                <div class="absolute -inset-1.5 bg-gradient-to-r from-brand-500 to-forest-600 rounded-3xl blur opacity-30 animate-pulse"></div>
+                <div class="relative rounded-2xl overflow-hidden shadow-2xl bg-white aspect-[4/3]">
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=800" 
+                         alt="Perros felices rescatados" 
+                         class="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
+                         onerror="this.src='https://placehold.co/800x600/e07a5f/ffffff?text=Huellas+de+Amor'">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-forest-700 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div>
+                <div class="text-4xl font-extrabold text-brand-100">1,240+</div>
+                <div class="text-sm text-gray-300 mt-1">Rescatados Exitosos</div>
+            </div>
+            <div>
+                <div class="text-4xl font-extrabold text-brand-100">890</div>
+                <div class="text-sm text-gray-300 mt-1">Adopciones Felices</div>
+            </div>
+            <div>
+                <div class="text-4xl font-extrabold text-brand-100">145</div>
+                <div class="text-sm text-gray-300 mt-1">Encontrados con su Dueño</div>
+            </div>
+            <div>
+                <div class="text-4xl font-extrabold text-brand-100">50+</div>
+                <div class="text-sm text-gray-300 mt-1">Voluntarios Activos</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="casos" class="py-20 bg-sand-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-3xl font-bold text-forest-700">Mural de Casos y Adopciones</h2>
+                <p class="text-gray-600 mt-2">Filtra por estado para ver animales perdidos buscando casa o listos para adopción.</p>
+                
+                <div class="flex flex-wrap justify-center gap-2 mt-6">
+                    <button onclick="filterPets('all', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-brand-500 text-white shadow-sm transition-all">Todos</button>
+                    <button onclick="filterPets('perdido', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-white text-forest-700 border border-gray-300 hover:bg-gray-50 transition-all">Perdidos / Desaparecidos</button>
+                    <button onclick="filterPets('adopcion', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-white text-forest-700 border border-gray-300 hover:bg-gray-50 transition-all">Listos para Adopción</button>
+                    <button onclick="filterPets('rescatado', this)" class="filter-btn px-5 py-2 rounded-full text-sm font-medium bg-white text-forest-700 border border-gray-300 hover:bg-gray-50 transition-all">Recuperándose</button>
+                </div>
+            </div>
+
+            <div id="petGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="perdido">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-red-500 text-white shadow">
+                            Perdido
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600" alt="Max" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Max</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Zona Norte</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Golden Retriever de 3 años, collar azul sin placa. Visto por última vez cerca del Parque Central.</p>
+                        </div>
+                        <button onclick="openDetailModal('Max', 'Perdido', 'Golden Retriever de 3 años, muy amigable pero asustadizo. Se perdió el 12 de Octubre.', 'https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&q=80&w=600', 'Contacto: 300 123 4567')" class="w-full py-2.5 rounded-xl bg-forest-600 text-white font-semibold text-sm hover:bg-forest-700 transition-colors">
+                            Ver Detalles y Contacto
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="adopcion">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-600 text-white shadow">
+                            En Adopción
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600" alt="Luna" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Luna</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Esterilizada / Vacunada</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Gatita siamesa de 1 año. Muy cariñosa, ideal para apartamento y acostumbrada a otros gatos.</p>
+                        </div>
+                        <button onclick="openDetailModal('Luna', 'En Adopción', 'Gatita siamesa rescatada de azotea. Ya cuenta con todas sus vacunas y desparasitación.', 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=600', 'Aplica para Adopción')" class="w-full py-2.5 rounded-xl bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 transition-colors">
+                            Quiero Adoptarla
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="rescatado">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-500 text-white shadow">
+                            Recuperación
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=600" alt="Rocky" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Rocky</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">En Clínica</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Mestizo rescatado con fractura leve en pata trasera. Ya fue operado exitosamente y evoluciona genial.</p>
+                        </div>
+                        <button onclick="openDetailModal('Rocky', 'En Recuperación', 'Rocky necesita padrinos para sus terapias de rehabilitación. Puedes aportar con insumos médicos.', 'https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?auto=format&fit=crop&q=80&w=600', 'Apoyar Tratamiento')" class="w-full py-2.5 rounded-xl bg-forest-600 text-white font-semibold text-sm hover:bg-forest-700 transition-colors">
+                            Apoyar a Rocky
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="adopcion">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-600 text-white shadow">
+                            En Adopción
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=600" alt="Bruno" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Bruno</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Mediano / Activo</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Cachorro de 8 meses lleno de energía. Le encanta correr y jugar con la pelota.</p>
+                        </div>
+                        <button onclick="openDetailModal('Bruno', 'En Adopción', 'Bruno busca una familia activa que lo acompañe en paseos al aire libre. Es muy inteligente y obediente.', 'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=600', 'Aplica para Adopción')" class="w-full py-2.5 rounded-xl bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 transition-colors">
+                            Quiero Adoptarlo
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="perdido">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-red-500 text-white shadow">
+                            Perdido
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=600" alt="Simón" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Simón</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Zona Sur</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Gato tabby gris con mancha blanca en el pecho. Responde a su nombre pero es desconfiado con extraños.</p>
+                        </div>
+                        <button onclick="openDetailModal('Simón', 'Perdido', 'Se extravió cerca de la Av. Principal. Ofrecemos recompensa por información veraz.', 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=600', 'Contacto: 310 987 6543')" class="w-full py-2.5 rounded-xl bg-forest-600 text-white font-semibold text-sm hover:bg-forest-700 transition-colors">
+                            Ver Detalles y Contacto
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="rescatado">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-amber-500 text-white shadow">
+                            Recuperación
+                        </span>
+                        <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600" alt="Mila" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Mila</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Hogar Temporal</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Gatita rescatada de la lluvia con cuadro de desnutrición leve. Ya recuperó peso y pelaje brillante.</p>
+                        </div>
+                        <button onclick="openDetailModal('Mila', 'En Recuperación', 'Mila estará lista para adopción en un par de semanas. Actualmente completa su esquema de vacunación.', 'https://images.unsplash.com/photo-1533738363-b7f9aef128ce?auto=format&fit=crop&q=80&w=600', 'Apoyar con Insumos')" class="w-full py-2.5 rounded-xl bg-forest-600 text-white font-semibold text-sm hover:bg-forest-700 transition-colors">
+                            Conocer más de Mila
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pet-card bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border border-gray-100 flex flex-col" data-category="adopcion">
+                    <div class="relative h-64 overflow-hidden">
+                        <span class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-emerald-600 text-white shadow">
+                            En Adopción
+                        </span>
+                        <img src="imagenes/gato gordo .jfif" alt="Gordo" onerror="this.onerror=null;this.src='imagenes/gato-gordo.jpg';" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold text-forest-700">Gordo</h3>
+                                <span class="text-xs text-gray-500 bg-gray-100 px-2 py-1 rounded">Tranquilo &middot; Esterilizado</span>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-4">Gato esponjoso y bonachón de 3 años. Le fascina acostarse panza arriba, tomar siestas al sol y recibir mimos.</p>
+                        </div>
+                        <button onclick="openDetailModal('Gordo', 'En Adopción', 'Gordo es un felino tierno, noble y muy pacífico en busca de un hogar cariñoso. Convive perfectamente en apartamento y cuenta con sus vacunas y esterilización al día.', 'imagenes/gato gordo .jfif', 'Apto para Adopción Inmediata')" class="w-full py-2.5 rounded-xl bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 transition-colors">
+                            Quiero Adoptarlo
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="adopta" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider">Proceso transparente</span>
+                <h2 class="text-3xl font-bold text-forest-700 mt-1">¿Cómo adoptar a tu nuevo mejor amigo?</h2>
+                <p class="text-gray-600 mt-2">Queremos asegurarnos de que cada mascota llegue al hogar ideal y permanente.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="bg-sand-100 p-8 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-md">1</div>
+                    <h3 class="font-bold text-lg text-forest-700 mb-2">Elige tu Mascota</h3>
+                    <p class="text-sm text-gray-600">Revisa nuestro catálogo de animalitos listos para adopción y enamórate.</p>
+                </div>
+                <div class="bg-sand-100 p-8 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-md">2</div>
+                    <h3 class="font-bold text-lg text-forest-700 mb-2">Llena el Formulario</h3>
+                    <p class="text-sm text-gray-600">Cuéntanos sobre tu espacio, estilo de vida y experiencia con animales.</p>
+                </div>
+                <div class="bg-sand-100 p-8 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-md">3</div>
+                    <h3 class="font-bold text-lg text-forest-700 mb-2">Entrevista Virtual</h3>
+                    <p class="text-sm text-gray-600">Charlaremos contigo para resolver dudas y asegurar compatibilidad.</p>
+                </div>
+                <div class="bg-sand-100 p-8 rounded-2xl relative text-center">
+                    <div class="w-12 h-12 bg-brand-500 text-white rounded-full flex items-center justify-center font-bold text-lg mx-auto mb-4 shadow-md">4</div>
+                    <h3 class="font-bold text-lg text-forest-700 mb-2">¡Llegada a Casa!</h3>
+                    <p class="text-sm text-gray-600">Llevamos a tu nuevo amigo a su hogar con seguimiento veterinario continuo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reportar" class="py-20 bg-forest-700 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-500/20 text-brand-100 border border-brand-500/30">
+                    Acción Rápida
+                </span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                    ¿Perdiste a tu mascota o encontraste una en la calle?
+                </h2>
+                <p class="text-gray-300 text-base">
+                    El tiempo es vital. Publica el caso inmediatamente en nuestra red de apoyo para que nuestra comunidad y voluntarios se activen en la búsqueda o rescate.
+                </p>
+                <div class="space-y-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-100">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="text-gray-200">Publicación instantánea en nuestro mural</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-100">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <span class="text-gray-200">Alerta a veterinarias aliadas y rescatistas zonales</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white text-forest-700 p-8 rounded-3xl shadow-2xl">
+                <h3 class="text-2xl font-bold mb-6">Reportar un caso ahora</h3>
+                <form onsubmit="handleReportSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Tipo de Reporte</label>
+                        <select id="reportType" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none bg-white">
+                            <option value="perdido">Mascota Perdida (Busco a mi dueño)</option>
+                            <option value="rescatado">Encontré un animal en la calle</option>
+                            <option value="urgencia">Urgencia Veterinaria / Maltrato</option>
+                        </select>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Tu Nombre</label>
+                            <input type="text" required placeholder="Ej. Ana Gómez" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Teléfono / WhatsApp</label>
+                            <input type="tel" required placeholder="Ej. 300 000 0000" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Ubicación aproximada</label>
+                        <input type="text" required placeholder="Barrio, zona o dirección clave" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase text-gray-600 mb-1">Descripción corta</label>
+                        <textarea rows="3" required placeholder="Raza, color, si lleva collar, estado actual..." class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none"></textarea>
+                    </div>
+                    <button type="submit" class="w-full py-3.5 rounded-xl bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-colors shadow-lg shadow-brand-500/20">
+                        Enviar Reporte Urgente
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section id="donar" class="py-20 bg-sand-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold bg-brand-100 text-brand-700">
+                Sostén Nuestra Labor
+            </span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-forest-700 mt-3 mb-4">
+                Tu aporte salva vidas y cubre cirugías
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mb-10">
+                No recibimos fondos gubernamentales fijos. Sobrevivimos gracias al corazón de personas como tú que donan alimento, medicinas o aportan económicamente.
+            </p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                <div onclick="selectDonation(this, '25')" class="donation-card cursor-pointer bg-white border-2 border-gray-200 p-6 rounded-2xl hover:border-brand-500 transition-all text-center">
+                    <span class="text-xs text-gray-500 block uppercase font-medium">Aporte Único</span>
+                    <span class="text-3xl font-extrabold text-forest-700 my-2 block">$25 <small class="text-sm font-normal text-gray-500">USD</small></span>
+                    <p class="text-xs text-gray-500">Alimento para 1 perro por 2 semanas</p>
+                </div>
+                <div onclick="selectDonation(this, '50')" class="donation-card cursor-pointer bg-white border-2 border-brand-500 bg-brand-50/50 p-6 rounded-2xl transition-all text-center shadow-md">
+                    <span class="text-xs text-brand-600 block uppercase font-bold">Más Popular</span>
+                    <span class="text-3xl font-extrabold text-forest-700 my-2 block">$50 <small class="text-sm font-normal text-gray-500">USD</small></span>
+                    <p class="text-xs text-gray-500">Vacunas completas y desparasitación</p>
+                </div>
+                <div onclick="selectDonation(this, '100')" class="donation-card cursor-pointer bg-white border-2 border-gray-200 p-6 rounded-2xl hover:border-brand-500 transition-all text-center">
+                    <span class="text-xs text-gray-500 block uppercase font-medium">Aporte Mayor</span>
+                    <span class="text-3xl font-extrabold text-forest-700 my-2 block">$100 <small class="text-sm font-normal text-gray-500">USD</small></span>
+                    <p class="text-xs text-gray-500">Aporte parcial para cirugía de rescate</p>
+                </div>
+            </div>
+
+            <button onclick="openModal('donateModal')" class="px-8 py-4 rounded-full bg-brand-500 text-white font-bold text-lg shadow-xl shadow-brand-500/30 hover:bg-brand-600 transition-all">
+                Realizar Donación Segura
+            </button>
+        </div>
+    </section>
+
+    <footer class="bg-forest-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white text-lg">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+                    <span class="text-lg font-bold tracking-tight">Huellas de Amor</span>
+                </div>
+                <p class="text-sm text-gray-400">
+                    Transformando la realidad de animales rescatados con transparencia, amor y compromiso profesional.
+                </p>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider text-brand-100 mb-4">Enlaces Rápidos</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li><a href="#inicio" class="hover:text-brand-500 transition-colors">Inicio</a></li>
+                    <li><a href="#casos" class="hover:text-brand-500 transition-colors">Casos Activos</a></li>
+                    <li><a href="#adopta" class="hover:text-brand-500 transition-colors">Adopciones</a></li>
+                    <li><a href="#reportar" class="hover:text-brand-500 transition-colors">Reportar Perdido</a></li>
+                    <li><a href="#donar" class="hover:text-brand-500 transition-colors">Donaciones</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider text-brand-100 mb-4">Contacto</h4>
+                <ul class="space-y-2 text-sm text-gray-300">
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-brand-500"></i> +57 300 123 4567
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-envelope text-brand-500"></i> contacto@huellasdeamor.org
+                    </li>
+                    <li class="flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot text-brand-500"></i> Bogotá, Colombia
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="font-bold text-sm uppercase tracking-wider text-brand-100 mb-4">Redes Sociales</h4>
+                <p class="text-xs text-gray-400 mb-3">Síguenos y ayúdanos compartiendo historias de rescate.</p>
+                <div class="flex gap-3">
+                    <a href="#" class="w-10 h-10 rounded-full bg-forest-700 hover:bg-brand-500 flex items-center justify-center text-white transition-colors" aria-label="Instagram">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-forest-700 hover:bg-brand-500 flex items-center justify-center text-white transition-colors" aria-label="WhatsApp">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-forest-700/60 text-center text-xs text-gray-400">
+            <p>&copy; 2026 Fundación Huellas de Amor &middot; Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <div id="detailModal" class="hidden fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative transform transition-all" onclick="event.stopPropagation()">
+            <button onclick="closeModal('detailModal')" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-forest-700 flex items-center justify-center shadow transition-all focus:outline-none" aria-label="Cerrar modal">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+            <div class="relative h-64 w-full bg-gray-100">
+                <span id="modalBadge" class="absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide bg-brand-500 text-white shadow">
+                    Estado
+                </span>
+                <img id="modalImg" src="" alt="Mascota" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 space-y-4">
+                <h3 id="modalTitle" class="text-2xl font-bold text-forest-700">Nombre de la Mascota</h3>
+                <p id="modalDesc" class="text-gray-600 text-sm leading-relaxed"></p>
+                
+                <div class="p-4 bg-sand-100 rounded-xl flex items-center gap-3 text-forest-700 font-semibold text-sm">
+                    <i class="fa-solid fa-circle-info text-brand-500 text-lg"></i>
+                    <span id="modalExtra">Información</span>
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button onclick="closeModal('detailModal')" class="flex-1 py-3 rounded-xl border border-gray-300 text-forest-700 font-semibold hover:bg-gray-100 transition-colors text-sm">
+                        Cerrar
+                    </button>
+                    <button onclick="showNotification('¡Gracias por tu interés! Nos comunicaremos contigo.'); closeModal('detailModal')" class="flex-1 py-3 rounded-xl bg-brand-500 text-white font-semibold hover:bg-brand-600 transition-colors shadow-lg shadow-brand-500/30 text-sm">
+                        Contactar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-32 opacity-0 transition-all duration-300 bg-forest-700 text-white px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-3">
+        <i class="fa-solid fa-circle-check text-brand-500 text-xl"></i>
+        <span id="toastMessage" class="text-sm font-medium">Acción completada con éxito.</span>
+    </div>
+
+    <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        }
+
+        function filterPets(category, clickedBtn) {
+            const cards = document.querySelectorAll('.pet-card');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => {
+                btn.classList.remove('bg-brand-500', 'text-white', 'shadow-sm');
+                btn.classList.add('bg-white', 'text-forest-700', 'border', 'border-gray-300');
+            });
+
+            const activeBtn = clickedBtn || (window.event ? window.event.target : null);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-forest-700', 'border', 'border-gray-300');
+                activeBtn.classList.add('bg-brand-500', 'text-white', 'shadow-sm');
+            }
+
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function openModal(modalId) {
+            if (modalId === 'donateModal') {
+                showNotification('Redirigiendo a pasarela de pagos segura...');
+                return;
+            }
+            if (modalId === 'reportModal') {
+                const el = document.getElementById('reportar');
+                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                return;
+            }
+            const targetModal = document.getElementById(modalId);
+            if (targetModal) targetModal.classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            const targetModal = document.getElementById(modalId);
+            if (targetModal) targetModal.classList.add('hidden');
+        }
+
+        function openDetailModal(name, status, desc, img, extra) {
+            document.getElementById('modalTitle').innerText = name;
+            
+            const badge = document.getElementById('modalBadge');
+            badge.innerText = status;
+            badge.className = 'absolute top-4 left-4 z-10 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide text-white shadow ' + 
+                (status.toLowerCase().includes('perdido') ? 'bg-red-500' : 
+                 status.toLowerCase().includes('adopci') ? 'bg-emerald-600' : 'bg-amber-500');
+
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalImg').src = img;
+            document.getElementById('modalExtra').innerText = extra;
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('detailModal');
+            if (modal && e.target === modal) {
+                closeModal('detailModal');
+            }
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal('detailModal');
+            }
+        });
+
+        function handleReportSubmit(e) {
+            e.preventDefault();
+            showNotification('¡Reporte enviado con éxito! Nuestros rescatistas lo revisarán de inmediato.');
+            e.target.reset();
+        }
+
+        let toastTimeout;
+        function showNotification(msg) {
+            const toast = document.getElementById('toast');
+            const msgEl = document.getElementById('toastMessage');
+            msgEl.innerText = msg;
+            toast.classList.remove('translate-y-32', 'opacity-0');
+            
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.add('translate-y-32', 'opacity-0');
+            }, 4000);
+        }
+
+        function selectDonation(el, amount) {
+            document.querySelectorAll('.donation-card').forEach(card => {
+                card.classList.remove('border-brand-500', 'bg-brand-50/50', 'shadow-md');
+                card.classList.add('border-gray-200');
+            });
+            el.classList.remove('border-gray-200');
+            el.classList.add('border-brand-500', 'bg-brand-50/50', 'shadow-md');
+            showNotification(`Has seleccionado un aporte de $${amount} USD. ¡Gracias por tu generosidad!`);
+        }
+    </script>
+</body>
+</html>

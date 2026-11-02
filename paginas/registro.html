@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Crear Cuenta — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <main class="main-content">
+    <div class="auth-layout">
+
+      <aside class="auth-side">
+        <img src="https://images.unsplash.com/photo-1415369629372-26f2fe60c467?auto=format&fit=crop&q=80&w=900" alt="Persona chocando la mano con la pata de un gato" onerror="this.onerror=null;this.src='../imagenes/gato-gordo.jpg';">
+        <div class="auth-side-content">
+          <h2>Únete a la comunidad Huellitas</h2>
+          <ul class="auth-benefits">
+            <li><i class="fa-solid fa-heart"></i> Postúlate para adoptar</li>
+            <li><i class="fa-solid fa-bullhorn"></i> Reporta y sigue casos de rescate</li>
+            <li><i class="fa-solid fa-calculator"></i> Guarda tus presupuestos</li>
+          </ul>
+        </div>
+      </aside>
+
+      <div class="auth-form">
+        <h1>Crea tu cuenta</h1>
+        <p class="auth-subtitle">Es gratis y toma menos de un minuto.</p>
+
+        <form id="formRegistro" onsubmit="procesarRegistro(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regNombre">Nombre</label>
+              <input type="text" id="regNombre" class="form-control" placeholder="Tu nombre" required autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="regApellido">Apellido</label>
+              <input type="text" id="regApellido" class="form-control" placeholder="Tu apellido" required autocomplete="family-name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regEmail">Correo electrónico</label>
+            <div class="input-icon">
+              <i class="fa-regular fa-envelope"></i>
+              <input type="email" id="regEmail" class="form-control" placeholder="ejemplo@correo.com" required autocomplete="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="regTelefono">Celular</label>
+            <div class="input-icon">
+              <i class="fa-solid fa-mobile-screen"></i>
+              <input type="tel" id="regTelefono" class="form-control" placeholder="Ej: 300 123 4567" required autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="regPass">Contraseña</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPass" class="form-control" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
+                <button type="button" class="input-toggle" onclick="verClave(this, 'regPass')" aria-label="Mostrar contraseña"><i class="fa-regular fa-eye"></i></button>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="regPass2">Confirmar contraseña</label>
+              <div class="input-icon">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" id="regPass2" class="form-control" placeholder="Repítela" required minlength="6" autocomplete="new-password">
+              </div>
+            </div>
+          </div>
+          <p class="field-hint hidden" id="errorClave" style="color: var(--badge-lost);"><i class="fa-solid fa-circle-exclamation" style="color: var(--badge-lost);"></i> Las contraseñas no coinciden.</p>
+
+          <label class="check-line">
+            <input type="checkbox" id="checkDatos" required>
+            Acepto la política de tratamiento de datos personales y las normas de convivencia de Fundación Huellitas.
+          </label>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            Crear mi cuenta <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </form>
+
+        <p class="auth-switch">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    async function procesarRegistro(e) {
+      e.preventDefault();
+      const p1 = document.getElementById('regPass').value;
+      const p2 = document.getElementById('regPass2').value;
+
+      if (p1 !== p2) {
+        document.getElementById('errorClave').classList.remove('hidden');
+        document.getElementById('regPass2').focus();
+        return;
+      }
+      document.getElementById('errorClave').classList.add('hidden');
+
+      const form = e.target;
+      Huellitas.enviando(form, true);
+      try {
+        const { token, usuario } = await Huellitas.api('registro', {
+          nombre: document.getElementById('regNombre').value,
+          apellido: document.getElementById('regApellido').value,
+          correo: document.getElementById('regEmail').value,
+          telefono: document.getElementById('regTelefono').value,
+          contrasena: p1,
+        });
+        Huellitas.iniciarSesion(usuario.correo, token);
+        const volver = new URLSearchParams(location.search).get('volver');
+        window.location.href = volver || 'perfil.html';
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+      }
+    }
+
+    function verClave(boton, id) {
+      const campo = document.getElementById(id);
+      const mostrar = campo.type === 'password';
+      campo.type = mostrar ? 'text' : 'password';
+      boton.innerHTML = `<i class="fa-regular fa-eye${mostrar ? '-slash' : ''}"></i>`;
+    }
+
+    document.querySelector('a[href="login.html"]').href += location.search;
+  </script>
+</body>
+</html>

@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Contactos de Emergencia — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact page-hero--urgent">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-phone-volume"></i> Contactos de emergencia</span>
+      <h1>¿A quién llamar si un animal está en peligro?</h1>
+      <p>Líneas oficiales en Colombia para denunciar maltrato, reportar animales heridos y rescatar fauna silvestre.</p>
+      <a href="tel:123" class="hero-call"><i class="fa-solid fa-phone"></i> Emergencia ahora: Línea 123</a>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section>
+      <div class="section-header">
+        <span class="section-tag">Guía rápida</span>
+        <h2>¿Qué está pasando?</h2>
+        <p>Elige la situación y te decimos a dónde comunicarte primero.</p>
+      </div>
+
+      <div class="scenario-grid">
+        <article class="scenario-card scenario-card--red">
+          <img class="scenario-photo" src="../imagenes/emergencias/perro-calle.webp" alt="Perro criollo asustado en la calle, junto a una persona" loading="lazy">
+          <div class="scenario-icon"><i class="fa-solid fa-hand"></i></div>
+          <h3>Maltrato en este momento</h3>
+          <p>Alguien está golpeando, envenenando o lastimando a un animal.</p>
+          <a href="tel:123" class="call-btn call-btn--red"><i class="fa-solid fa-phone"></i> Llamar al 123</a>
+          <small>Después, denuncia ante la Fiscalía (Línea 122).</small>
+        </article>
+
+        <article class="scenario-card">
+          <img class="scenario-photo" src="../imagenes/emergencias/gatitos.webp" alt="Dos gatitos abandonados en la calle" loading="lazy">
+          <div class="scenario-icon"><i class="fa-solid fa-kit-medical"></i></div>
+          <h3>Animal herido o abandonado</h3>
+          <p>Un perro o gato en la calle, atropellado, enfermo o sin hogar.</p>
+          <a href="reportar.html" class="call-btn"><i class="fa-solid fa-bullhorn"></i> Reportar a la fundación</a>
+          <small>O escríbenos al WhatsApp 302 433 8944.</small>
+        </article>
+
+        <article class="scenario-card scenario-card--green">
+          <img class="scenario-photo" src="../imagenes/emergencias/zarigueya.webp" alt="Zarigüeya mirando a la cámara desde un árbol" loading="lazy">
+          <div class="scenario-icon"><i class="fa-solid fa-feather"></i></div>
+          <h3>Animal silvestre</h3>
+          <p>Zarigüeyas, aves, ardillas, serpientes o fauna en tráfico ilegal.</p>
+          <a href="#directorio" class="call-btn call-btn--green"><i class="fa-solid fa-leaf"></i> Ver autoridad de mi región</a>
+          <small><a href="#fauna">¿Qué hacer mientras llega la ayuda?</a></small>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <span class="section-tag">Líneas nacionales</span>
+        <h2>Funcionan en todo el país</h2>
+      </div>
+
+      <div class="line-grid line-grid--4">
+        <article class="line-card">
+          <span class="line-entity">Policía Nacional</span>
+          <h3>Línea de emergencias</h3>
+          <p>Maltrato en curso, delitos y emergencias en vía pública.</p>
+          <a href="tel:123" class="line-number"><i class="fa-solid fa-phone"></i> 123</a>
+          <span class="line-meta"><i class="fa-regular fa-clock"></i> 24 horas, todos los días</span>
+        </article>
+
+        <article class="line-card">
+          <span class="line-entity">Fiscalía General · GELMA</span>
+          <h3>Denuncia por maltrato animal</h3>
+          <p>Grupo Especial de Lucha contra el Maltrato Animal (Ley 1774 de 2016 y Ley Ángel).</p>
+          <a href="tel:122" class="line-number"><i class="fa-solid fa-phone"></i> 122</a>
+          <span class="line-meta"><i class="fa-solid fa-phone-flip"></i> Gratuita: <a href="tel:018000919748">018000 91 97 48</a></span>
+        </article>
+
+        <article class="line-card">
+          <span class="line-entity">Policía Nacional</span>
+          <h3>Línea gratuita de atención</h3>
+          <p>Orientación ciudadana y reporte de casos ante la Policía en cualquier región.</p>
+          <a href="tel:018000910112" class="line-number"><i class="fa-solid fa-phone"></i> 018000 910 112</a>
+          <span class="line-meta"><i class="fa-solid fa-circle-info"></i> Línea nacional gratuita</span>
+        </article>
+
+        <article class="line-card line-card--brand">
+          <span class="line-entity">Fundación Huellitas</span>
+          <h3>Nuestra línea de rescate</h3>
+          <p>Animales heridos, abandonados o perdidos. Te orientamos y activamos voluntarios.</p>
+          <a href="https://wa.me/573024338944?text=Hola%2C%20necesito%20ayuda%20con%20un%20animal." target="_blank" class="line-number"><i class="fa-brands fa-whatsapp"></i> 302 433 8944</a>
+          <span class="line-meta"><i class="fa-brands fa-whatsapp"></i> WhatsApp y llamadas</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block" id="fauna">
+      <div class="section-header">
+        <span class="section-tag">Fauna silvestre</span>
+        <h2>También son nuestros vecinos</h2>
+        <p>En Medellín y el Valle de Aburrá es común encontrar estos animales en parques, techos y patios. No son mascotas: si ves uno herido, atrapado o en venta, repórtalo.</p>
+      </div>
+
+      <div class="wild-grid">
+        <figure class="wild-card">
+          <img src="../imagenes/emergencias/zarigueya.webp" alt="Zarigüeya en un árbol" loading="lazy">
+          <figcaption><strong>Zarigüeya</strong><span>Controla plagas y garrapatas. No es una rata ni es peligrosa.</span></figcaption>
+        </figure>
+        <figure class="wild-card">
+          <img src="../imagenes/emergencias/ardilla.webp" alt="Ardilla de cola roja comiendo sobre una rama" loading="lazy">
+          <figcaption><strong>Ardilla de cola roja</strong><span>Siembra árboles al esconder semillas. No le des comida procesada.</span></figcaption>
+        </figure>
+        <figure class="wild-card">
+          <img src="../imagenes/emergencias/perezoso.webp" alt="Oso perezoso de tres dedos abrazado a un tronco" loading="lazy">
+          <figcaption><strong>Oso perezoso</strong><span>Casi nunca baja de los árboles. Si está en el suelo o en un cable, necesita ayuda.</span></figcaption>
+        </figure>
+        <figure class="wild-card">
+          <img src="../imagenes/emergencias/titi.webp" alt="Tití gris entre las hojas de un árbol" loading="lazy">
+          <figcaption><strong>Tití gris</strong><span>Mono pequeño en peligro de extinción, propio de Colombia. Nunca lo compres.</span></figcaption>
+        </figure>
+        <figure class="wild-card">
+          <img src="../imagenes/emergencias/iguana.webp" alt="Iguana verde fotografiada en Medellín" loading="lazy">
+          <figcaption><strong>Iguana</strong><span>Toma el sol en parques y quebradas. Es tranquila si no la molestan.</span></figcaption>
+        </figure>
+        <figure class="wild-card">
+          <img src="../imagenes/emergencias/buho.webp" alt="Currucutú, un búho pequeño, en un centro de atención de fauna" loading="lazy">
+          <figcaption><strong>Currucutú</strong><span>Búho pequeño y nocturno. Los polluelos a veces caen del nido.</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="wild-tips">
+        <div class="wild-tips-col wild-tips-col--si">
+          <h3><i class="fa-solid fa-circle-check"></i> Sí hacer</h3>
+          <ul>
+            <li>Mantén la distancia y aleja a perros, gatos y niños.</li>
+            <li>Si está herido, cúbrelo con una caja con huecos y déjalo en un lugar oscuro y tranquilo.</li>
+            <li>Toma una foto y anota la dirección exacta.</li>
+            <li>Llama a la autoridad ambiental de tu región o al 123.</li>
+          </ul>
+        </div>
+        <div class="wild-tips-col wild-tips-col--no">
+          <h3><i class="fa-solid fa-circle-xmark"></i> No hacer</h3>
+          <ul>
+            <li>No le des agua ni comida: puede ahogarse o enfermarse.</li>
+            <li>No lo lleves a tu casa ni lo tengas como mascota.</li>
+            <li>No lo toques sin protección: puede morder o transmitir enfermedades.</li>
+            <li>No compres animales silvestres: el tráfico de fauna es un delito.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block" id="directorio">
+      <div class="section-header">
+        <span class="section-tag">Directorio regional</span>
+        <h2>Autoridades por ciudad</h2>
+        <p>Atienden fauna silvestre y casos de maltrato en su territorio. ¿Tu ciudad no aparece? <a href="#directorio" class="link-otra-ciudad" onclick="verOtraCiudad()">Mira qué hacer</a>.</p>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filtrarRegion('todos', this)">Todas</button>
+        <button class="filter-btn" onclick="filtrarRegion('medellin', this)">Medellín</button>
+        <button class="filter-btn" onclick="filtrarRegion('antioquia', this)">Valle de Aburrá</button>
+        <button class="filter-btn" onclick="filtrarRegion('bogota', this)">Bogotá</button>
+        <button class="filter-btn" onclick="filtrarRegion('valle', this)">Cali</button>
+        <button class="filter-btn" onclick="filtrarRegion('otra', this)"><i class="fa-solid fa-location-crosshairs"></i> Mi ciudad no está</button>
+      </div>
+
+      <div class="line-grid" id="listaRegiones">
+        <article class="line-card item-region" data-region="medellin">
+          <span class="line-city"><i class="fa-solid fa-location-dot"></i> Medellín</span>
+          <span class="line-entity">Centro de Bienestar Animal La Perla · Alcaldía</span>
+          <h3>Perros y gatos abandonados o en riesgo</h3>
+          <p>Rescate, atención veterinaria y adopción de animales de compañía. Si el maltrato está pasando o el animal puede morir, llama primero al 123.</p>
+          <a href="tel:6043855560" class="line-number"><i class="fa-solid fa-phone"></i> (604) 385 5560</a>
+          <span class="line-meta"><i class="fa-solid fa-heart"></i> Adopciones: <a href="tel:3117963457">311 796 3457</a></span>
+          <span class="line-meta"><i class="fa-regular fa-clock"></i> L-V 7:00 a. m. - 3:00 p. m. · Fines de semana y festivos 8:00 a. m. - 2:00 p. m.</span>
+        </article>
+
+        <article class="line-card item-region" data-region="medellin">
+          <span class="line-city"><i class="fa-solid fa-location-dot"></i> Medellín</span>
+          <span class="line-entity">Inspección de Protección Animal · Alcaldía</span>
+          <h3>Denuncia por maltrato o abandono</h3>
+          <p>Para casos que no son urgentes: negligencia, abandono, acumulación de animales o maltrato en viviendas. Puede imponer multas.</p>
+          <a href="https://www.medellin.gov.co/es/pqrsd/" target="_blank" rel="noopener" class="line-number"><i class="fa-solid fa-file-pen"></i> Denunciar en línea</a>
+          <span class="line-meta"><i class="fa-solid fa-building"></i> Presencial: Casa de Justicia El Bosque, piso 2, oficina 211</span>
+        </article>
+
+        <article class="line-card item-region" data-region="medellin antioquia">
+          <span class="line-city"><i class="fa-solid fa-location-dot"></i> Valle de Aburrá</span>
+          <span class="line-entity">Área Metropolitana del Valle de Aburrá</span>
+          <h3>Fauna silvestre y denuncias ambientales</h3>
+          <p>Medellín, Bello, Itagüí, Envigado, Sabaneta y demás municipios del área.</p>
+          <a href="https://wa.me/573046300090" target="_blank" class="line-number"><i class="fa-brands fa-whatsapp"></i> 304 630 0090</a>
+          <span class="line-meta"><i class="fa-solid fa-phone-flip"></i> Línea de atención: <a href="tel:6043856000">(604) 385 6000</a></span>
+        </article>
+
+        <article class="line-card item-region" data-region="bogota">
+          <span class="line-city"><i class="fa-solid fa-location-dot"></i> Bogotá</span>
+          <span class="line-entity">Instituto Distrital de Protección y Bienestar Animal</span>
+          <h3>Línea contra el maltrato animal</h3>
+          <p>Bogotá. Los casos de gravedad alta deben reportarse a la Línea 123.</p>
+          <a href="tel:6014399801" class="line-number"><i class="fa-solid fa-phone"></i> (601) 439 9801</a>
+          <span class="line-meta"><i class="fa-regular fa-clock"></i> L-V 6:00 a. m. - 8:00 p. m. · Fines de semana 6:30 a. m. - 7:30 p. m.</span>
+        </article>
+
+        <article class="line-card item-region" data-region="valle">
+          <span class="line-city"><i class="fa-solid fa-location-dot"></i> Cali</span>
+          <span class="line-entity">DAGMA · Alcaldía de Cali</span>
+          <h3>Fauna silvestre en riesgo</h3>
+          <p>Rescate y atención de fauna silvestre en Cali. Correo: faunasilvestre@cali.gov.co</p>
+          <a href="tel:6026530869" class="line-number"><i class="fa-solid fa-phone"></i> (602) 653 0869</a>
+          <span class="line-meta"><i class="fa-regular fa-clock"></i> Lunes a viernes, 8:00 a. m. - 5:00 p. m.</span>
+        </article>
+
+        <article class="city-guide item-region" data-region="otra">
+          <div class="city-guide-head">
+            <div class="scenario-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+            <div>
+              <h3>¿Tu ciudad no aparece? Así encuentras a quién acudir</h3>
+              <p>Estas opciones funcionan en cualquier municipio de Colombia.</p>
+            </div>
+          </div>
+          <ol class="city-guide-steps">
+            <li><strong>Emergencia o maltrato en este momento</strong><span>Llama a la <a href="tel:123">Línea 123</a>. La Policía atiende en todo el país.</span></li>
+            <li><strong>Denuncia por maltrato</strong><span>Fiscalía, <a href="tel:122">Línea 122</a> o la gratuita <a href="tel:018000919748">018000 91 97 48</a>.</span></li>
+            <li><strong>Perros y gatos abandonados</strong><span>Busca la Secretaría de Ambiente, Salud o Bienestar Animal de tu alcaldía, o una inspección de policía.</span></li>
+            <li><strong>Animales silvestres</strong><span>Contacta a la Corporación Autónoma Regional (CAR) de tu departamento o a la Policía Ambiental por el 123.</span></li>
+          </ol>
+          <a href="https://wa.me/573024338944?text=Hola%2C%20necesito%20ayuda%20con%20un%20animal%20y%20mi%20ciudad%20no%20aparece%20en%20el%20directorio." target="_blank" class="btn btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> Te ayudamos a encontrar la entidad de tu ciudad
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <div class="info-note">
+      <i class="fa-solid fa-circle-info"></i>
+      <p>Las entidades pueden cambiar sus números. Si una línea no responde, llama al <strong>123</strong> o consulta el portal oficial de la entidad. <em>Última revisión: octubre de 2026.</em></p>
+    </div>
+  </main>
+
+  <script>
+    function verOtraCiudad() {
+      const botones = document.querySelectorAll('#directorio .filter-btn');
+      filtrarRegion('otra', botones[botones.length - 1]);
+    }
+
+    function filtrarRegion(region, boton) {
+      document.querySelectorAll('#directorio .filter-btn').forEach(b => b.classList.remove('active'));
+      boton.classList.add('active');
+      document.querySelectorAll('.item-region').forEach(tarjeta => {
+        tarjeta.classList.toggle('hidden', region !== 'todos' && !tarjeta.dataset.region.split(' ').includes(region));
+      });
+    }
+  </script>
+</body>
+</html>

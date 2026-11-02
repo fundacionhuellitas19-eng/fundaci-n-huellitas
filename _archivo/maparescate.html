@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Rescate — Fundación Huellitas</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .map-container {
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 2.5rem;
+    }
+    .map-placeholder {
+      width: 100%;
+      height: 450px;
+      background: #E2E8F0;
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      color: var(--color-text-muted);
+      margin-bottom: 1.5rem;
+      border: 2px dashed #CBD5E1;
+      position: relative;
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      font-size: 0.85rem;
+      padding: 1rem;
+      background: var(--color-bg);
+      border-radius: var(--radius-sm);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #EF4444; }
+    .dot-green { background: #10B981; }
+    .dot-blue { background: #3B82F6; }
+    .dot-purple { background: #8B5CF6; }
+    .dot-orange { background: #F59E0B; }
+  </style>
+</head>
+<body>
+
+  <div class="demo-banner">
+    🐾 <strong>Panel de Demostración:</strong> Simulador de mapas y georreferenciación de reportes comunitarios y centros aliados.
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-brand">
+      <img src="imagenes/logooficial.png" alt="Logo Fundación Huellitas" class="brand-logo"> FUNDACIÓN HUELLITAS
+    </a>
+
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="explorar.html">Explorar</a></li>
+
+      <li class="nav-dropdown">
+        <a href="#">Educación ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="ley-angel.html">⚖️ Ley Ángel</a></li>
+          <li><a href="sugerencias.html">💡 Sugerencias de Cuidado</a></li>
+          <li><a href="aprende.html">📚 Infórmate y Aprende</a></li>
+          <li><a href="asociaciones.html">🏢 Asociaciones Aliadas</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-dropdown">
+        <a href="#">Acción ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="adopcion.html">🐕 Historias y Adopción</a></li>
+          <li><a href="calculadora.html">🧮 Calculadora de Gastos</a></li>
+          <li><a href="mapa-rescate.html">🗺️ Mapa de Rescate</a></li>
+          <li><a href="reportar.html">📢 Reportar Caso</a></li>
+          <li><a href="donar.html">❤️ Donar y Voluntariado</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-dropdown">
+        <a href="#">Comunidad ▾</a>
+        <ul class="dropdown-menu">
+          <li><a href="buzon.html">📫 Buzón Ciudadano</a></li>
+          <li><a href="encuesta.html">📊 Encuesta Comunitaria</a></li>
+          <li><a href="emergencias.html">🚨 Contactos de Emergencia</a></li>
+        </ul>
+      </li>
+
+      <li><a href="login.html" class="btn-primary">Iniciar Sesión</a></li>
+    </ul>
+  </nav>
+
+  <main class="main-content">
+    <div style="margin-bottom: 2rem;">
+      <a href="explorar.html" class="btn-secondary" style="font-size: 0.85rem; padding: 0.4rem 1rem;">&larr; Volver al menú de exploración</a>
+    </div>
+
+    <div class="section-header">
+      <h2>Mapa Interactivo de Rescate</h2>
+      <p style="max-width: 650px; margin: 0 auto;">
+        Visualiza reportes comunitarios activos, centros de atención veterinaria verificados y organizaciones protectoras aliadas en tu zona.
+      </p>
+    </div>
+
+    <div class="map-container">
+      
+      <div class="map-placeholder">
+        <div style="font-size: 3rem; margin-bottom: 10px;">🗺️</div>
+        <h3 style="color: var(--color-text-main); margin-bottom: 5px;">Área de Integración (API Maps)</h3>
+        <p style="font-size: 0.9rem;">Aquí se renderiza el mapa dinámico (Google Maps / OpenStreetMap) mediante coordenadas.</p>
+        
+        <div class="dot dot-red" style="position: absolute; top: 30%; left: 40%; box-shadow: 0 0 0 4px rgba(239,68,68,0.2);" title="Reporte ciudadano"></div>
+        <div class="dot dot-blue" style="position: absolute; top: 60%; left: 20%;" title="Centro veterinario"></div>
+        <div class="dot dot-purple" style="position: absolute; top: 50%; left: 70%;" title="Organización aliada"></div>
+        <div class="dot dot-orange" style="position: absolute; top: 20%; left: 80%;" title="Punto de ayuda en especie"></div>
+      </div>
+
+      <div class="map-legend">
+        <div class="legend-item"><span class="dot dot-red"></span> Reporte / Caso activo</div>
+        <div class="legend-item"><span class="dot dot-green"></span> Punto de atención / Rescate</div>
+        <div class="legend-item"><span class="dot dot-blue"></span> Centro veterinario aliado</div>
+        <div class="legend-item"><span class="dot dot-purple"></span> Organización / Fundación</div>
+        <div class="legend-item"><span class="dot dot-orange"></span> Punto de acopio (Donaciones)</div>
+      </div>
+
+      <div style="display: flex; gap: 15px; margin-top: 1.5rem; justify-content: center; flex-wrap: wrap;">
+        <a href="reportar.html" class="btn-primary">Generar Nuevo Reporte 📍</a>
+        <button class="btn-secondary" onclick="alert('Función de geolocalización simulada. Solicitará permisos de ubicación al navegador.')">Centrar en mi ubicación 🎯</button>
+      </div>
+
+      <div style="margin-top: 1.5rem; font-size: 0.8rem; color: var(--color-text-muted); text-align: center;">
+        <strong>Nota de Privacidad:</strong> Para proteger a los reportantes, el mapa público solo muestra ubicaciones aproximadas y oculta información personal (nombres y teléfonos). Únicamente los administradores tienen acceso a los datos completos de contacto en la base de datos segura.
+      </div>
+    </div>
+  </main>
+
+  <a href="https://wa.me/573024338944?text=Hola,%20quiero%20comunicarme%20con%20Fundaci%C3%B3n%20Huellitas.%20Necesito%20orientaci%C3%B3n%20sobre..." 
+     class="whatsapp-float" 
+     target="_blank" 
+     aria-label="Contacto por WhatsApp">
+    💬
+  </a>
+
+  <footer>
+    <p>&copy; 2026 Fundación Huellitas &middot; Proyecto educativo de desarrollo web y bienestar animal &middot; Colombia</p>
+  </footer>
+
+</body>
+</html>

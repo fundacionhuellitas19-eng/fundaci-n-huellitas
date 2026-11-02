@@ -1,0 +1,21 @@
+{
+  "name": "fundacion-huellitas",
+  "version": "1.0.0",
+  "description": "Sitio web y servidor de Fundación Huellitas",
+  "main": "servidor/index.js",
+  "private": true,
+  "scripts": {
+    "start": "node servidor/index.js",
+    "crear-tablas": "node servidor/crear-tablas.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.11.5"
+  }
+}

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Servicios — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-paw"></i> Servicios</span>
+      <h1>Todo lo que hacemos por los animales</h1>
+      <p>Adopción, rescate, educación y apoyo a la comunidad. Encuentra en un solo lugar la ayuda o la información que necesitas.</p>
+
+      <div class="service-search">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="search" id="buscador" placeholder="¿Qué necesitas? Ej: adoptar, vacunas, maltrato..." oninput="buscar(this.value)" aria-label="Buscar un servicio">
+      </div>
+
+      <div class="quick-pills">
+        <span>Lo más buscado:</span>
+        <a href="adopcion.html">Adoptar</a>
+        <a href="reportar.html">Reportar un caso</a>
+        <a href="emergencias.html">Líneas de emergencia</a>
+        <a href="donar.html">Donar</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <div class="featured-grid" data-grupo>
+      <a href="adopcion.html" class="featured-card service-item" data-buscar="adoptar adopcion perros gatos hogar mascotas test historias rescate">
+        <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&q=80&w=900" alt="Perros rescatados corriendo felices" loading="lazy">
+        <div class="featured-overlay">
+          <span class="featured-tag"><i class="fa-solid fa-heart"></i> 6 animales esperan hogar</span>
+          <h2>Adopta un amigo para siempre</h2>
+          <p>Conoce a los perros y gatos que buscan familia y haz el test "¿Estás listo para adoptar?".</p>
+          <span class="featured-link">Ver animales en adopción <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+
+      <a href="reportar.html" class="featured-card service-item" data-buscar="reportar reporte caso maltrato abandono herido calle perdido emergencia">
+        <img src="https://images.unsplash.com/photo-1477884213360-7e9d7dcc1e48?auto=format&fit=crop&q=80&w=900" alt="Perro en la calle esperando ayuda" loading="lazy">
+        <div class="featured-overlay">
+          <span class="featured-tag featured-tag--urgent"><i class="fa-solid fa-bolt"></i> Respuesta rápida</span>
+          <h2>Reporta un animal en riesgo</h2>
+          <p>¿Viste un animal herido, abandonado o maltratado? Avísanos y activamos nuestra red de rescate.</p>
+          <span class="featured-link">Hacer un reporte <i class="fa-solid fa-arrow-right"></i></span>
+        </div>
+      </a>
+    </div>
+
+    <section class="service-group" data-grupo>
+      <div class="service-group-header">
+        <div class="service-group-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+        <div>
+          <h2>Ayuda y acción</h2>
+          <p>Herramientas para rescatar, apoyar y cuidar.</p>
+        </div>
+      </div>
+      <div class="service-grid">
+        <a href="mapa-rescate.html" class="service-card service-item" data-buscar="mapa rescate ubicacion veterinarias puntos atencion">
+          <div class="service-icon"><i class="fa-solid fa-map-location-dot"></i></div>
+          <h3>Mapa de Rescate</h3>
+          <p>Puntos de atención, reportes comunitarios y centros veterinarios cerca de ti.</p>
+          <span class="service-link">Abrir mapa <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="donar.html" class="service-card service-item" data-buscar="donar donacion dinero voluntario voluntariado ayudar especie nequi">
+          <div class="service-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+          <h3>Donar y Voluntariado</h3>
+          <p>Apoya con dinero, alimento, insumos o tu tiempo como voluntario.</p>
+          <span class="service-link">Cómo ayudar <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="calculadora.html" class="service-card service-item" data-buscar="calculadora gastos presupuesto costo dinero mes">
+          <div class="service-icon"><i class="fa-solid fa-calculator"></i></div>
+          <h3>Calculadora de Gastos</h3>
+          <p>Calcula cuánto cuesta al mes y al año cuidar bien a una mascota.</p>
+          <span class="service-link">Calcular presupuesto <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="service-group" data-grupo>
+      <div class="service-group-header">
+        <div class="service-group-icon service-group-icon--blue"><i class="fa-solid fa-graduation-cap"></i></div>
+        <div>
+          <h2>Aprende</h2>
+          <p>Información confiable para una tenencia responsable.</p>
+        </div>
+      </div>
+      <div class="service-grid service-grid--4">
+        <a href="ley-angel.html" class="service-card service-item" data-buscar="ley angel 2455 derechos maltrato legal norma">
+          <div class="service-icon service-icon--blue"><i class="fa-solid fa-scale-balanced"></i></div>
+          <h3>Ley Ángel</h3>
+          <p>Tus derechos, deberes y el marco legal contra el maltrato animal (Ley 2455 de 2025).</p>
+          <span class="service-link">Consultar la ley <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="sugerencias.html" class="service-card service-item" data-buscar="sugerencias cuidado alimentacion hidratacion polvora pirotecnia paseos salud consejos">
+          <div class="service-icon service-icon--blue"><i class="fa-solid fa-lightbulb"></i></div>
+          <h3>Sugerencias de Cuidado</h3>
+          <p>Guías sobre alimentación, hidratación, pólvora, paseos y salud preventiva.</p>
+          <span class="service-link">Leer consejos <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="aprende.html" class="service-card service-item" data-buscar="aprende vacunas vacunacion desparasitacion primeros auxilios fauna silvestre">
+          <div class="service-icon service-icon--blue"><i class="fa-solid fa-book-medical"></i></div>
+          <h3>Infórmate y Aprende</h3>
+          <p>Vacunación, desparasitación, primeros auxilios y manejo de fauna silvestre.</p>
+          <span class="service-link">Aprender más <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="asociaciones.html" class="service-card service-item" data-buscar="asociaciones aliadas fundaciones refugios organizaciones directorio">
+          <div class="service-icon service-icon--blue"><i class="fa-solid fa-handshake"></i></div>
+          <h3>Asociaciones Aliadas</h3>
+          <p>Fundaciones y refugios verificados en diferentes regiones de Colombia.</p>
+          <span class="service-link">Ver directorio <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </section>
+
+    <section class="service-group" data-grupo>
+      <div class="service-group-header">
+        <div class="service-group-icon service-group-icon--green"><i class="fa-solid fa-people-group"></i></div>
+        <div>
+          <h2>Comunidad</h2>
+          <p>Participa, opina y encuentra ayuda inmediata.</p>
+        </div>
+      </div>
+      <div class="service-grid">
+        <a href="emergencias.html" class="service-card service-item" data-buscar="emergencias lineas telefonos 123 policia ambiental gelma fiscalia urgencia">
+          <div class="service-icon service-icon--red"><i class="fa-solid fa-phone-volume"></i></div>
+          <h3>Contactos de Emergencia</h3>
+          <p>Línea 123, Fiscalía (GELMA) y autoridades ambientales por ciudad.</p>
+          <span class="service-link">Ver líneas <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="buzon.html" class="service-card service-item" data-buscar="buzon mensaje preguntas sugerencias contacto escribir">
+          <div class="service-icon service-icon--green"><i class="fa-solid fa-envelope-open-text"></i></div>
+          <h3>Buzón Ciudadano</h3>
+          <p>Envíanos tus preguntas, sugerencias y propuestas para la comunidad.</p>
+          <span class="service-link">Escribir mensaje <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+        <a href="encuesta.html" class="service-card service-item" data-buscar="encuesta opinion sondeo esterilizacion abandono">
+          <div class="service-icon service-icon--green"><i class="fa-solid fa-square-poll-vertical"></i></div>
+          <h3>Encuesta Comunitaria</h3>
+          <p>Cuéntanos qué piensas sobre el abandono, la esterilización y las normas.</p>
+          <span class="service-link">Responder encuesta <i class="fa-solid fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </section>
+
+    <div class="service-empty hidden" id="sinResultados">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <h3>No encontramos ese servicio</h3>
+      <p>Prueba con otra palabra o escríbenos y te orientamos.</p>
+    </div>
+
+    <div class="help-banner">
+      <div>
+        <h2>¿No encuentras lo que buscas?</h2>
+        <p>Escríbenos por WhatsApp y una persona de nuestro equipo te orienta.</p>
+      </div>
+      <a href="https://wa.me/573024338944?text=Hola%2C%20necesito%20orientaci%C3%B3n%20de%20Fundaci%C3%B3n%20Huellitas." target="_blank" class="btn btn-primary btn-lg">
+        <i class="fa-brands fa-whatsapp"></i> Hablar con nosotros
+      </a>
+    </div>
+
+  </main>
+
+  <script>
+    const normalizar = (texto) => texto.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+    function buscar(texto) {
+      const q = normalizar(texto.trim());
+      let total = 0;
+
+      document.querySelectorAll('.service-item').forEach(item => {
+        const contenido = normalizar(item.textContent + ' ' + item.dataset.buscar);
+        const coincide = !q || contenido.includes(q);
+        item.classList.toggle('hidden', !coincide);
+        if (coincide) total++;
+      });
+
+      document.querySelectorAll('[data-grupo]').forEach(grupo => {
+        grupo.classList.toggle('hidden', !grupo.querySelector('.service-item:not(.hidden)'));
+      });
+
+      document.getElementById('sinResultados').classList.toggle('hidden', total > 0);
+    }
+  </script>
+</body>
+</html>

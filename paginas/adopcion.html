@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Historias y Adopción — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <main class="main-content">
+
+    <div class="section-header">
+      <span class="section-tag">Adopción Responsable</span>
+      <h2>Encuentra a tu nuevo mejor amigo</h2>
+      <p>Todos nuestros animales se entregan vacunados, desparasitados y esterilizados, con acompañamiento después de la adopción.</p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filtrar('todos', this)">Todos</button>
+      <button class="filter-btn" onclick="filtrar('perro', this)"><i class="fa-solid fa-dog"></i> Perros</button>
+      <button class="filter-btn" onclick="filtrar('gato', this)"><i class="fa-solid fa-cat"></i> Gatos</button>
+    </div>
+
+    <div class="pet-grid pet-grid--catalogo" id="catalogo"></div>
+
+    <section class="ready-test" id="test">
+      <div class="ready-test-intro">
+        <span class="section-tag">Test rápido</span>
+        <h2>¿Estás listo para tener una mascota?</h2>
+        <p>Responde 5 preguntas y descubre si este es el momento ideal para adoptar.</p>
+      </div>
+
+      <form id="testForm" onsubmit="evaluarTest(event)">
+        <ol class="test-questions">
+          <li>
+            <p>¿Tienes tiempo para pasear, jugar y acompañar a tu mascota todos los días?</p>
+            <div class="test-options">
+              <label><input type="radio" name="q1" value="1" required> Sí</label>
+              <label><input type="radio" name="q1" value="0"> No</label>
+            </div>
+          </li>
+          <li>
+            <p>¿Puedes asumir gastos mensuales de alimento, veterinario e imprevistos?</p>
+            <div class="test-options">
+              <label><input type="radio" name="q2" value="1" required> Sí</label>
+              <label><input type="radio" name="q2" value="0"> No</label>
+            </div>
+          </li>
+          <li>
+            <p>¿Todas las personas con las que vives están de acuerdo con adoptar?</p>
+            <div class="test-options">
+              <label><input type="radio" name="q3" value="1" required> Sí</label>
+              <label><input type="radio" name="q3" value="0"> No</label>
+            </div>
+          </li>
+          <li>
+            <p>¿Tu vivienda permite mascotas (propia o con permiso del arrendador)?</p>
+            <div class="test-options">
+              <label><input type="radio" name="q4" value="1" required> Sí</label>
+              <label><input type="radio" name="q4" value="0"> No</label>
+            </div>
+          </li>
+          <li>
+            <p>¿Estás dispuesto a cuidarla durante toda su vida, que puede ser de 10 a 15 años?</p>
+            <div class="test-options">
+              <label><input type="radio" name="q5" value="1" required> Sí</label>
+              <label><input type="radio" name="q5" value="0"> No</label>
+            </div>
+          </li>
+        </ol>
+        <button type="submit" class="btn btn-primary btn-block">Ver mi resultado</button>
+      </form>
+
+      <div id="testResultado" class="test-result hidden"></div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <span class="section-tag">Historias de Rescate</span>
+        <h2>De la calle a un hogar</h2>
+        <p>Cada rescate empieza con un reporte de alguien que decidió no mirar hacia otro lado.</p>
+      </div>
+
+      <div class="testimonial-grid">
+        <article class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&q=80&w=600"
+               alt="Tigre, gato atigrado rescatado, descansando en un sofá" class="testimonial-img"
+               onerror="this.onerror=null;this.src='../imagenes/gato-gordo.jpg';">
+          <div class="testimonial-body">
+            <span class="story-tag"><i class="fa-solid fa-location-dot"></i> Rescatado en Bello</span>
+            <h3 class="story-title">Tigre</h3>
+            <p class="testimonial-quote">Lo encontramos dentro de un motor de carro, con una infección en los ojos. Tras tres semanas de tratamiento recuperó la vista por completo.</p>
+            <div class="testimonial-author">
+              <strong>Hoy</strong>
+              <span>Vive con una familia en Envigado</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1530281700549-e82e7bf110d6?auto=format&fit=crop&q=80&w=600"
+               alt="Sol, perra rescatada, corriendo feliz en la playa" class="testimonial-img"
+               onerror="this.onerror=null;this.src='../imagenes/perro.angel.webp';">
+          <div class="testimonial-body">
+            <span class="story-tag"><i class="fa-solid fa-location-dot"></i> Rescatada en Itagüí</span>
+            <h3 class="story-title">Sol</h3>
+            <p class="testimonial-quote">Una vecina reportó a una perra amarrada sin agua ni comida. Llegó con bajo peso y mucho miedo; en su hogar de paso volvió a confiar en las personas.</p>
+            <div class="testimonial-author">
+              <strong>Hoy</strong>
+              <span>Adoptada y viviendo cerca del mar</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1494256997604-768d1f608cac?auto=format&fit=crop&q=80&w=600"
+               alt="Nube, gata rescatada, asomándose debajo de una manta" class="testimonial-img"
+               onerror="this.onerror=null;this.src='../imagenes/gato-gordo.jpg';">
+          <div class="testimonial-body">
+            <span class="story-tag"><i class="fa-solid fa-location-dot"></i> Rescatada en Medellín</span>
+            <h3 class="story-title">Nube</h3>
+            <p class="testimonial-quote">Fue abandonada en una caja junto a sus hermanos. Era la más tímida de la camada y pasó semanas escondida, hasta que encontró a alguien con paciencia.</p>
+            <div class="testimonial-author">
+              <strong>Hoy</strong>
+              <span>Duerme en la cama de su nueva familia</span>
+            </div>
+          </div>
+        </article>
+      </div>
+      <p class="swipe-hint"><i class="fa-solid fa-hand-pointer"></i> Desliza para ver más</p>
+    </section>
+
+    <div class="notice-wildlife">
+      <div class="notice-wildlife-icon"><i class="fa-solid fa-leaf"></i></div>
+      <div>
+        <h3>¿Por qué no damos en adopción animales silvestres?</h3>
+        <p>
+          Los animales silvestres (loros, tortugas, monos, ardillas, etc.) <strong>no deben ser tratados como mascotas</strong>. Tienen necesidades biológicas y ecológicas que solo pueden satisfacerse en su hábitat natural. Su tenencia doméstica promueve el tráfico ilegal y deteriora los ecosistemas.
+        </p>
+        <p>
+          Si encuentras un animal silvestre herido, desorientado o en riesgo, comunícate con la autoridad ambiental de tu región (como Corantioquia, Cornare, el Área Metropolitana o el Dagma).
+        </p>
+        <a href="emergencias.html">Consultar directorio de autoridades ambientales &rarr;</a>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="modalPostulacion" class="modal-backdrop hidden" onclick="if (event.target === this) cerrarPostulacion()">
+    <div class="modal-box">
+      <button class="modal-close-btn" onclick="cerrarPostulacion()" aria-label="Cerrar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="modal-content-area" id="postulacionContenido"></div>
+    </div>
+  </div>
+
+  <script>
+    const ANIMALES = [
+      {
+        nombre: 'Mona', especie: 'gato', sexo: 'Hembra', edad: '4 años', tamano: 'Mediana',
+        estado: 'disponible',
+        foto: '../imagenes/mural/mona.webp',
+        descripcion: 'Vivió meses en un parqueadero de Bello. Hoy es una gata tranquila que ama las cobijas, las siestas al sol y los mimos. Ideal para apartamento.',
+        rasgos: ['Vacunada', 'Esterilizada', 'Desparasitada'],
+      },
+      {
+        nombre: 'Lucas', especie: 'perro', sexo: 'Macho', edad: '1 año', tamano: 'Grande',
+        estado: 'disponible',
+        foto: '../imagenes/mural/lucas.webp',
+        descripcion: 'Lo abandonaron amarrado a una reja en Itagüí. Es noble, juguetón y aprende rápido. Busca una familia con patio o paseos diarios.',
+        rasgos: ['Vacunado', 'Esterilizado', 'Apto con niños'],
+      },
+      {
+        nombre: 'Canela', especie: 'gato', sexo: 'Hembra', edad: '2 años', tamano: 'Pequeña',
+        estado: 'disponible',
+        foto: '../imagenes/adopcion/canela.webp',
+        descripcion: 'Gata tricolor rescatada de una zona verde en Robledo. Es curiosa, le encanta jugar con plumas y se lleva bien con otros gatos.',
+        rasgos: ['Vacunada', 'Esterilizada', 'Sociable'],
+      },
+      {
+        nombre: 'Negra', especie: 'perro', sexo: 'Hembra', edad: '5 años', tamano: 'Mediana',
+        estado: 'disponible',
+        foto: '../imagenes/adopcion/negra.webp',
+        descripcion: 'Criolla tranquila y muy cariñosa. Su familia se mudó y la dejó atrás. Camina bien con correa y es perfecta para un hogar calmado.',
+        rasgos: ['Vacunada', 'Esterilizada', 'Tranquila'],
+      },
+      {
+        nombre: 'Oreo', especie: 'gato', sexo: 'Macho', edad: '3 años', tamano: 'Mediano',
+        estado: 'disponible',
+        foto: '../imagenes/adopcion/oreo.webp',
+        descripcion: 'Gato blanco y negro que pedía comida en una calle de La América. Es independiente pero muy ronroneador cuando entra en confianza.',
+        rasgos: ['Vacunado', 'Esterilizado', 'Desparasitado'],
+      },
+      {
+        nombre: 'Mila', especie: 'gato', sexo: 'Hembra', edad: '5 meses', tamano: 'Pequeña',
+        estado: 'preadopcion',
+        foto: '../imagenes/mural/mila.webp',
+        descripcion: 'La rescataron de una alcantarilla en Sabaneta. Usa cono mientras termina de sanar su herida. Puedes postularte desde ya como pre-adoptante.',
+        rasgos: ['Desparasitada', 'En curaciones'],
+      },
+    ];
+
+    const ESTADOS = {
+      disponible: { texto: 'Disponible', clase: 'badge-adopcion' },
+      preadopcion: { texto: 'Pre-adopción', clase: 'badge-recuperacion' },
+    };
+
+    function dibujarCatalogo() {
+      document.getElementById('catalogo').innerHTML = ANIMALES.map((a, i) => `
+        <article class="pet-card" data-especie="${a.especie}">
+          <div class="pet-img-container">
+            <span class="pet-status-badge ${ESTADOS[a.estado].clase}">${ESTADOS[a.estado].texto}</span>
+            <img src="${a.foto}" alt="${a.nombre}, ${a.especie === 'perro' ? 'perro' : 'gato'} en adopción" loading="lazy">
+          </div>
+          <div class="pet-body">
+            <div>
+              <div class="pet-title-row">
+                <h3 class="pet-name">${a.nombre}</h3>
+                <span class="pet-tag-zone">${a.sexo} &middot; ${a.edad}</span>
+              </div>
+              <p class="pet-facts">
+                <span><i class="fa-solid fa-${a.especie === 'perro' ? 'dog' : 'cat'}"></i> ${a.especie === 'perro' ? 'Perro' : 'Gato'}</span>
+                <span><i class="fa-solid fa-ruler"></i> ${a.tamano}</span>
+              </p>
+              <p class="pet-desc">${a.descripcion}</p>
+              <ul class="pet-traits">
+                ${a.rasgos.map(r => `<li><i class="fa-solid fa-check"></i> ${r}</li>`).join('')}
+              </ul>
+            </div>
+            <button class="btn btn-primary btn-block" onclick="abrirPostulacion(${i})">
+              <i class="fa-solid fa-heart"></i> Quiero adoptar${a.sexo === 'Hembra' ? 'la' : 'lo'}
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function filtrar(especie, boton) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      boton.classList.add('active');
+      document.querySelectorAll('#catalogo .pet-card').forEach(card => {
+        card.style.display = (especie === 'todos' || card.dataset.especie === especie) ? '' : 'none';
+      });
+    }
+
+    const modal = document.getElementById('modalPostulacion');
+    const contenido = document.getElementById('postulacionContenido');
+
+    function abrirPostulacion(i) {
+      const a = ANIMALES[i];
+
+      if (!Huellitas.sesion()) {
+        const volver = encodeURIComponent('adopcion.html');
+        contenido.innerHTML = `
+          <div class="modal-center">
+            <div class="modal-icon"><i class="fa-solid fa-user-lock"></i></div>
+            <h3>Inicia sesión para postularte</h3>
+            <p>Para adoptar a ${a.nombre} necesitas una cuenta. Así podemos hacer seguimiento a tu postulación y contactarte.</p>
+            <div class="modal-actions">
+              <a href="registro.html?volver=${volver}" class="btn btn-secondary" style="flex: 1;">Crear cuenta</a>
+              <a href="login.html?volver=${volver}" class="btn btn-primary" style="flex: 1;">Iniciar sesión</a>
+            </div>
+          </div>`;
+      } else {
+        contenido.innerHTML = `
+          <h3>Postulación para adoptar a ${a.nombre}</h3>
+          <p>Cuéntanos un poco de ti. Revisaremos tu postulación y te contactaremos en las próximas 48 horas.</p>
+          <form onsubmit="enviarPostulacion(event, ${i})">
+            <div class="form-group">
+              <label for="pNombre">Nombre completo</label>
+              <input id="pNombre" class="form-control" required placeholder="Ej. Ana Gómez">
+            </div>
+            <div class="form-group">
+              <label for="pTelefono">Teléfono / WhatsApp</label>
+              <input id="pTelefono" type="tel" class="form-control" required placeholder="Ej. 300 123 4567">
+            </div>
+            <div class="form-group">
+              <label for="pVivienda">Tipo de vivienda</label>
+              <select id="pVivienda" class="form-control" required>
+                <option value="">Selecciona una opción</option>
+                <option>Casa</option>
+                <option>Apartamento</option>
+                <option>Finca</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="pMotivo">¿Por qué quieres adoptar a ${a.nombre}?</label>
+              <textarea id="pMotivo" class="form-control" rows="3" required placeholder="Cuéntanos sobre tu hogar y tu rutina"></textarea>
+            </div>
+            <label class="check-line">
+              <input type="checkbox" required> Acepto una visita de compatibilidad y el seguimiento post-adopción.
+            </label>
+            <button type="submit" class="btn btn-primary btn-block">Enviar postulación</button>
+          </form>`;
+      }
+      modal.classList.remove('hidden');
+    }
+
+    async function enviarPostulacion(e, i) {
+      e.preventDefault();
+      const a = ANIMALES[i];
+      const form = e.target;
+      Huellitas.enviando(form, true);
+      try {
+        await Huellitas.api('postulaciones', {
+          mascota: a.nombre,
+          nombre_completo: document.getElementById('pNombre').value,
+          telefono: document.getElementById('pTelefono').value,
+          vivienda: document.getElementById('pVivienda').value,
+          motivo: document.getElementById('pMotivo').value,
+        });
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+        return;
+      }
+
+      contenido.innerHTML = `
+        <div class="modal-center">
+          <div class="modal-icon modal-icon--ok"><i class="fa-solid fa-circle-check"></i></div>
+          <h3>¡Postulación enviada!</h3>
+          <p>Gracias por querer darle un hogar a ${a.nombre}. Nuestro equipo te contactará en las próximas 48 horas para agendar la entrevista.</p>
+          <div class="modal-actions">
+            <button class="btn btn-secondary" style="flex: 1;" onclick="cerrarPostulacion()">Seguir viendo</button>
+            <a href="perfil.html" class="btn btn-primary" style="flex: 1;">Ver mis postulaciones</a>
+          </div>
+        </div>`;
+    }
+
+    function cerrarPostulacion() {
+      modal.classList.add('hidden');
+    }
+
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarPostulacion(); });
+
+    function evaluarTest(e) {
+      e.preventDefault();
+      const datos = new FormData(e.target);
+      let puntos = 0;
+      for (const valor of datos.values()) puntos += Number(valor);
+
+      let titulo, mensaje, icono, accion;
+      if (puntos === 5) {
+        icono = 'fa-face-grin-hearts';
+        titulo = '¡Estás listo para adoptar!';
+        mensaje = 'Cumples con lo más importante para darle un hogar responsable a un animal. Conoce a los peluditos que esperan por ti.';
+        accion = '<a href="#catalogo" class="btn btn-primary">Ver animales en adopción</a>';
+      } else if (puntos >= 3) {
+        icono = 'fa-face-smile';
+        titulo = 'Vas por buen camino';
+        mensaje = 'Tienes buena disposición, pero hay puntos por resolver antes de adoptar. Revisa nuestras guías de cuidado y calcula los gastos.';
+        accion = '<a href="calculadora.html" class="btn btn-primary">Calcular gastos</a> <a href="sugerencias.html" class="btn btn-secondary">Ver guías de cuidado</a>';
+      } else {
+        icono = 'fa-face-meh';
+        titulo = 'Quizás no es el momento';
+        mensaje = 'Adoptar es un compromiso de muchos años. Si hoy no puedes, también ayudas siendo voluntario o donando.';
+        accion = '<a href="donar.html" class="btn btn-primary">Otras formas de ayudar</a>';
+      }
+
+      const resultado = document.getElementById('testResultado');
+      resultado.innerHTML = `
+        <i class="fa-solid ${icono} test-result-icon"></i>
+        <p class="test-score">${puntos} de 5</p>
+        <h3>${titulo}</h3>
+        <p>${mensaje}</p>
+        <div class="test-result-actions">${accion}</div>
+        <button class="test-retry" onclick="reiniciarTest()">Volver a hacer el test</button>`;
+      e.target.classList.add('hidden');
+      resultado.classList.remove('hidden');
+    }
+
+    function reiniciarTest() {
+      const form = document.getElementById('testForm');
+      form.reset();
+      form.classList.remove('hidden');
+      document.getElementById('testResultado').classList.add('hidden');
+    }
+
+    dibujarCatalogo();
+  </script>
+</body>
+</html>

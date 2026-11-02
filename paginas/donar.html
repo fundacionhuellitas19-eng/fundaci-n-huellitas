@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Donar y Voluntariado — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-heart"></i> Donar y voluntariado</span>
+      <h1>Tu ayuda salva vidas</h1>
+      <p>No recibimos financiación fija del Estado. Cada rescate, cirugía y plato de comida es posible gracias a personas como tú.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <section class="donate-box" id="dinero">
+      <div class="donate-box-intro">
+        <span class="section-tag">Donación en dinero</span>
+        <h2>Elige cuánto quieres aportar</h2>
+        <p>Selecciona un monto y te enviamos los datos de pago por WhatsApp.</p>
+      </div>
+
+      <div class="donation-grid">
+        <div class="donation-card" onclick="elegirMonto(this, '50.000')">
+          <span class="donation-badge">Aporte básico</span>
+          <div class="donation-amount">$50.000 <small>COP</small></div>
+          <p class="donation-desc">Alimento para un perro rescatado durante 2 semanas.</p>
+        </div>
+        <div class="donation-card active" onclick="elegirMonto(this, '100.000')">
+          <span class="donation-badge">Más elegido</span>
+          <div class="donation-amount">$100.000 <small>COP</small></div>
+          <p class="donation-desc">Vacunas completas, desparasitación y microchip.</p>
+        </div>
+        <div class="donation-card" onclick="elegirMonto(this, '200.000')">
+          <span class="donation-badge">Padrino quirúrgico</span>
+          <div class="donation-amount">$200.000 <small>COP</small></div>
+          <p class="donation-desc">Esterilización o cirugía de un animal rescatado.</p>
+        </div>
+      </div>
+
+      <div class="custom-amount">
+        <label for="otroMonto">¿Prefieres otro monto?</label>
+        <div class="custom-amount-input">
+          <span>$</span>
+          <input type="number" id="otroMonto" min="5000" step="1000" placeholder="Escribe el valor en pesos" oninput="montoPersonalizado(this.value)">
+        </div>
+      </div>
+
+      <div class="donation-cta">
+        <a id="donationBtn" href="#" target="_blank" class="btn btn-primary btn-lg">
+          <i class="fa-brands fa-whatsapp"></i> <span id="donationBtnText">Donar $100.000</span>
+        </a>
+        <div class="payment-methods">
+          <span class="payment-chip">Nequi</span>
+          <span class="payment-chip">Daviplata</span>
+          <span class="payment-chip">Bancolombia</span>
+          <span class="payment-chip">Transferencia</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-block transparency">
+      <div class="transparency-text">
+        <span class="section-tag">Transparencia</span>
+        <h2>¿En qué usamos tu donación?</h2>
+        <p>Cada peso tiene un destino claro. Publicamos nuestros gastos para que sepas exactamente cómo ayudas.</p>
+      </div>
+      <ul class="impact-bars">
+        <li><div><strong>Atención veterinaria y cirugías</strong><span>45%</span></div><i style="--valor: 45%"></i></li>
+        <li><div><strong>Alimento y medicamentos</strong><span>25%</span></div><i style="--valor: 25%"></i></li>
+        <li><div><strong>Jornadas de esterilización</strong><span>20%</span></div><i style="--valor: 20%"></i></li>
+        <li><div><strong>Transporte y operación</strong><span>10%</span></div><i style="--valor: 10%"></i></li>
+      </ul>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <span class="section-tag">Tu ayuda en acción</span>
+        <h2>Así se ve tu ayuda</h2>
+        <p>Detrás de cada donación hay paseos, comida, curaciones y muchas horas de cariño en nuestros hogares de paso.</p>
+      </div>
+      <div class="photo-strip">
+        <figure>
+          <img src="../imagenes/donar/vol-refugio.webp" alt="Voluntaria acompañando a un perro rescatado en el refugio" loading="lazy">
+          <figcaption><i class="fa-solid fa-hand-holding-heart"></i> Voluntariado en el refugio</figcaption>
+        </figure>
+        <figure>
+          <img src="../imagenes/donar/vol-paseo.webp" alt="Voluntarios paseando perros rescatados" loading="lazy">
+          <figcaption><i class="fa-solid fa-person-walking"></i> Paseos diarios</figcaption>
+        </figure>
+        <figure>
+          <img src="../imagenes/donar/alimentacion.webp" alt="Voluntaria con un perro y su plato de comida" loading="lazy">
+          <figcaption><i class="fa-solid fa-bowl-food"></i> Alimento donado</figcaption>
+        </figure>
+        <figure>
+          <img src="../imagenes/donar/gatos-refugio.webp" alt="Voluntaria revisando gatos rescatados en sus transportadoras" loading="lazy">
+          <figcaption><i class="fa-solid fa-cat"></i> Gatos en recuperación</figcaption>
+        </figure>
+        <figure>
+          <img src="../imagenes/donar/vol-jaula.webp" alt="Voluntario saludando a un perro en su espacio del refugio" loading="lazy">
+          <figcaption><i class="fa-solid fa-heart"></i> Cariño y confianza</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-header">
+        <span class="section-tag">Otras formas de ayudar</span>
+        <h2>No todo es dinero</h2>
+        <p>Tu tiempo, tus cosas y tu voz también cambian vidas.</p>
+      </div>
+
+      <div class="help-options">
+        <article class="help-option">
+          <div class="service-icon"><i class="fa-solid fa-box-open"></i></div>
+          <h3>Donaciones en especie</h3>
+          <p>Lo que más necesitamos en los hogares de paso:</p>
+          <ul class="check-list">
+            <li>Alimento sellado para perros y gatos</li>
+            <li>Mantas, camas y toallas limpias</li>
+            <li>Arena sanitaria y elementos de higiene</li>
+            <li>Guacales, correas y transportadoras</li>
+          </ul>
+          <a href="https://wa.me/573024338944?text=Hola%2C%20quiero%20donar%20alimento%20o%20insumos.%20%C2%BFC%C3%B3mo%20coordino%20la%20entrega%3F" target="_blank" class="btn btn-secondary btn-block">
+            <i class="fa-brands fa-whatsapp"></i> Coordinar entrega
+          </a>
+        </article>
+
+        <article class="help-option help-option--featured">
+          <div class="service-icon service-icon--green"><i class="fa-solid fa-hand-holding-heart"></i></div>
+          <h3>Sé voluntario</h3>
+          <p>Elige cómo quieres ayudar y te contactamos:</p>
+          <form id="formVoluntario" onsubmit="enviarVoluntario(event)">
+            <div class="choice-chips choice-chips--small">
+              <label><input type="checkbox" name="area" value="Hogar de paso"><span>Hogar de paso</span></label>
+              <label><input type="checkbox" name="area" value="Fotografía y redes"><span>Fotografía y redes</span></label>
+              <label><input type="checkbox" name="area" value="Jornadas de adopción"><span>Jornadas de adopción</span></label>
+              <label><input type="checkbox" name="area" value="Transporte"><span>Transporte</span></label>
+            </div>
+            <div class="form-group">
+              <label for="volNombre">Tu nombre</label>
+              <input id="volNombre" class="form-control" required placeholder="Ej. Ana Gómez">
+            </div>
+            <div class="form-group">
+              <label for="volCiudad">Ciudad</label>
+              <input id="volCiudad" class="form-control" required placeholder="Ej. Medellín">
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">
+              <i class="fa-brands fa-whatsapp"></i> Quiero ser voluntario
+            </button>
+          </form>
+        </article>
+
+        <article class="help-option">
+          <div class="service-icon service-icon--blue"><i class="fa-solid fa-share-nodes"></i></div>
+          <h3>Comparte y difunde</h3>
+          <p>Un perro perdido o un gato en adopción puede encontrar familia gracias a que alguien compartió su foto.</p>
+          <ul class="check-list">
+            <li>Síguenos en Instagram</li>
+            <li>Comparte los casos del mural</li>
+            <li>Habla de adopción responsable</li>
+          </ul>
+          <a href="https://www.instagram.com/fundacionhuellitas.co/" target="_blank" class="btn btn-secondary btn-block">
+            <i class="fa-brands fa-instagram"></i> Seguir en Instagram
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block faq">
+      <div class="section-header">
+        <span class="section-tag">Preguntas frecuentes</span>
+        <h2>Resolvemos tus dudas</h2>
+      </div>
+      <details>
+        <summary>¿Cómo sé que mi donación llega a los animales?</summary>
+        <p>Te enviamos una confirmación cuando recibimos tu aporte, y publicamos en Instagram los rescates, cirugías y jornadas que se hacen posibles con las donaciones.</p>
+      </details>
+      <details>
+        <summary>¿Puedo donar si vivo fuera de Colombia?</summary>
+        <p>Sí. Escríbenos por WhatsApp y te indicamos la forma más sencilla de enviar tu aporte desde el exterior.</p>
+      </details>
+      <details>
+        <summary>¿Reciben alimento que ya está abierto?</summary>
+        <p>Por seguridad de los animales solo recibimos alimento sellado y dentro de su fecha de vencimiento. Mantas, camas y accesorios sí pueden ser usados, siempre que estén limpios.</p>
+      </details>
+      <details>
+        <summary>¿Necesito experiencia para ser voluntario?</summary>
+        <p>No. Te damos una inducción antes de empezar, y hay tareas para todos los perfiles: desde tomar fotos hasta transportar animales a sus citas veterinarias.</p>
+      </details>
+    </section>
+
+  </main>
+
+  <script>
+    const WHATSAPP = 'https://wa.me/573024338944?text=';
+
+    function actualizarBoton(monto) {
+      document.getElementById('donationBtnText').innerText = `Donar $${monto}`;
+      document.getElementById('donationBtn').href =
+        WHATSAPP + encodeURIComponent(`Hola, quiero donar $${monto} COP a Fundación Huellitas 🐾 ¿Me envían los datos de pago?`);
+    }
+
+    function elegirMonto(tarjeta, monto) {
+      document.querySelectorAll('.donation-card').forEach(c => c.classList.remove('active'));
+      tarjeta.classList.add('active');
+      document.getElementById('otroMonto').value = '';
+      actualizarBoton(monto);
+    }
+
+    function montoPersonalizado(valor) {
+      if (!valor) return;
+      document.querySelectorAll('.donation-card').forEach(c => c.classList.remove('active'));
+      actualizarBoton(Number(valor).toLocaleString('es-CO'));
+    }
+
+    async function enviarVoluntario(e) {
+      e.preventDefault();
+      const form = e.target;
+      const nombre = document.getElementById('volNombre').value;
+      const ciudad = document.getElementById('volCiudad').value;
+      const areas = [...document.querySelectorAll('input[name="area"]:checked')].map(a => a.value);
+      const mensaje = `Hola, soy ${nombre} de ${ciudad} y quiero ser voluntario de Fundación Huellitas 🐾` +
+        (areas.length ? `. Me interesa: ${areas.join(', ')}.` : '.');
+      const ventana = window.open(WHATSAPP + encodeURIComponent(mensaje), '_blank');
+
+      Huellitas.enviando(form, true);
+      try {
+        await Huellitas.api('voluntarios', { nombre, ciudad, areas });
+      } catch (error) {
+        Huellitas.avisar(error.message);
+      }
+      Huellitas.enviando(form, false);
+      if (!ventana) location.href = WHATSAPP + encodeURIComponent(mensaje);
+    }
+
+    actualizarBoton('100.000');
+  </script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Asociaciones Aliadas — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-handshake"></i> Red de aliados</span>
+      <h1>Juntos llegamos más lejos</h1>
+      <p>Trabajamos con refugios, veterinarias y fundaciones que protegen a los animales de forma legal y responsable en Colombia.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="filtrarAliados('todos', this)">Todos</button>
+      <button class="filter-btn" onclick="filtrarAliados('fundacion', this)"><i class="fa-solid fa-heart"></i> Fundaciones</button>
+      <button class="filter-btn" onclick="filtrarAliados('refugio', this)"><i class="fa-solid fa-house-chimney"></i> Refugios</button>
+      <button class="filter-btn" onclick="filtrarAliados('veterinaria', this)"><i class="fa-solid fa-stethoscope"></i> Veterinarias</button>
+    </div>
+
+    <div class="org-grid" id="aliados"></div>
+
+    <section class="section-block join-box" id="registrar">
+      <div class="join-box-text">
+        <span class="section-tag">¿Tienes una veterinaria o fundación?</span>
+        <h2>Únete a nuestra red</h2>
+        <p>Registra tu organización para que más personas sepan dónde acudir. Revisamos cada solicitud antes de publicarla en el directorio.</p>
+        <ul class="check-list">
+          <li>Aparece en nuestro directorio y en el mapa de rescate</li>
+          <li>Recibe casos de animales rescatados cerca de ti</li>
+          <li>Participa en jornadas de adopción y esterilización</li>
+        </ul>
+      </div>
+
+      <div class="form-card">
+        <form id="formAliado" onsubmit="registrarAliado(event)">
+          <p class="field-label">Tipo de organización</p>
+          <div class="choice-chips">
+            <label><input type="radio" name="tipo" value="veterinaria" required><span><i class="fa-solid fa-stethoscope"></i> Veterinaria</span></label>
+            <label><input type="radio" name="tipo" value="fundacion"><span><i class="fa-solid fa-heart"></i> Fundación</span></label>
+            <label><input type="radio" name="tipo" value="refugio"><span><i class="fa-solid fa-house-chimney"></i> Refugio</span></label>
+          </div>
+          <div class="form-group">
+            <label for="alNombre">Nombre de la organización</label>
+            <input id="alNombre" class="form-control" required placeholder="Ej. Clínica Veterinaria San Roque">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="alCiudad">Ciudad</label>
+              <input id="alCiudad" class="form-control" required placeholder="Ej. Medellín">
+            </div>
+            <div class="form-group">
+              <label for="alTelefono">Teléfono</label>
+              <input id="alTelefono" type="tel" class="form-control" required placeholder="Ej. 604 123 4567">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="alServicios">Servicios que ofrecen</label>
+            <textarea id="alServicios" class="form-control" rows="2" required placeholder="Ej. Consulta general, urgencias 24 h, esterilización"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block"><i class="fa-solid fa-paper-plane"></i> Enviar solicitud</button>
+        </form>
+
+        <div id="aliadoEnviado" class="form-success hidden">
+          <div class="modal-icon modal-icon--ok"><i class="fa-solid fa-circle-check"></i></div>
+          <h2>¡Solicitud recibida!</h2>
+          <p>Gracias por querer sumarte. Revisaremos la información y te contactaremos para verificar los datos antes de publicarla.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const ALIADOS = [
+      {
+        nombre: 'Fundación Huellitas', tipo: 'fundacion', ciudad: 'Medellín · Cobertura nacional',
+        descripcion: 'Rescate, rehabilitación y adopción responsable, con programas de educación comunitaria y atención de reportes.',
+        servicios: ['Rescate', 'Adopción', 'Educación', 'Orientación legal'],
+        enlace: 'adopcion.html', textoEnlace: 'Ver animales en adopción', sede: true,
+      },
+      {
+        nombre: 'Refugio Huellas de Esperanza', tipo: 'refugio', ciudad: 'Valle de Aburrá, Antioquia',
+        descripcion: 'Recibe animales rescatados y apoya nuestras jornadas de adopción. Se especializa en perros mayores.',
+        servicios: ['Hogar de paso', 'Rehabilitación', 'Adopciones especiales'],
+        enlace: 'adopcion.html', textoEnlace: 'Ver animales en adopción',
+      },
+      {
+        nombre: 'Clínica Veterinaria Patitas', tipo: 'veterinaria', ciudad: 'Bello, Antioquia',
+        descripcion: 'Atiende a los animales rescatados por la fundación y ofrece tarifas especiales en jornadas de esterilización.',
+        servicios: ['Consulta general', 'Cirugía', 'Esterilización'],
+        enlace: 'mapa-rescate.html', textoEnlace: 'Ver en el mapa',
+      },
+    ];
+
+    const ICONOS = { fundacion: 'fa-heart', refugio: 'fa-house-chimney', veterinaria: 'fa-stethoscope' };
+    const NOMBRES = { fundacion: 'Fundación', refugio: 'Refugio', veterinaria: 'Veterinaria' };
+
+    document.getElementById('aliados').innerHTML = ALIADOS.map(a => `
+      <article class="org-card${a.sede ? ' org-card--main' : ''}" data-tipo="${a.tipo}">
+        <div class="org-card-header">
+          <div class="org-avatar org-avatar--${a.tipo}"><i class="fa-solid ${ICONOS[a.tipo]}"></i></div>
+          <div>
+            <span class="org-type">${a.sede ? 'Sede principal' : NOMBRES[a.tipo]}</span>
+            <h3>${a.nombre}</h3>
+          </div>
+        </div>
+        <p class="org-location"><i class="fa-solid fa-location-dot"></i> ${a.ciudad}</p>
+        <p class="org-desc">${a.descripcion}</p>
+        <ul class="tag-list">${a.servicios.map(s => `<li>${s}</li>`).join('')}</ul>
+        <span class="org-verified"><i class="fa-solid fa-circle-check"></i> Aliado verificado</span>
+        <a href="${a.enlace}" class="btn btn-secondary btn-block">${a.textoEnlace}</a>
+      </article>
+    `).join('');
+
+    function filtrarAliados(tipo, boton) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      boton.classList.add('active');
+      document.querySelectorAll('.org-card').forEach(card => {
+        card.classList.toggle('hidden', tipo !== 'todos' && card.dataset.tipo !== tipo);
+      });
+    }
+
+    async function registrarAliado(e) {
+      e.preventDefault();
+      const form = e.target;
+      Huellitas.enviando(form, true);
+      try {
+        await Huellitas.api('aliados', {
+          nombre: document.getElementById('alNombre').value,
+          tipo: form.tipo.value,
+          ciudad: document.getElementById('alCiudad').value,
+          telefono: document.getElementById('alTelefono').value,
+          servicios: document.getElementById('alServicios').value,
+        });
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+        return;
+      }
+      Huellitas.enviando(form, false);
+      e.target.classList.add('hidden');
+      document.getElementById('aliadoEnviado').classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>

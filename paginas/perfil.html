@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    .profile-card {
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: 2rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-card);
+      text-align: center;
+      height: fit-content;
+    }
+    .profile-avatar {
+      width: 90px;
+      height: 90px;
+      background: var(--color-primary-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.8rem;
+      margin: 0 auto 1rem;
+      border: 3px solid var(--color-primary);
+    }
+    .dashboard-panel {
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      padding: 2.2rem;
+      border: 1px solid var(--color-border);
+      box-shadow: var(--shadow-card);
+      margin-bottom: 2rem;
+    }
+    .history-item {
+      padding: 1.2rem;
+      background: var(--color-bg);
+      border-radius: var(--radius-sm);
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    @media (max-width: 800px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <main class="main-content">
+    <div class="profile-grid">
+      
+      <aside class="profile-card">
+        <div class="profile-avatar">👤</div>
+        <h3 id="perfilNombre" style="color: var(--color-primary); margin-bottom: 0.2rem;">Mi cuenta</h3>
+        <p id="perfilCorreo" style="font-size: 0.85rem; color: var(--color-text-muted); margin-bottom: 1.2rem;">ana.gomez@correo.com</p>
+        <span style="background: #DCFCE7; color: #166534; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 12px;">Cuenta Verificada</span>
+        
+        <div style="margin-top: 2rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem; text-align: left; font-size: 0.88rem;">
+          <p><strong>Rol:</strong> Usuario Comunitario</p>
+          <p style="margin-top: 0.5rem;"><strong>Miembro desde:</strong> <span id="perfilDesde">—</span></p>
+        </div>
+
+        <button class="btn btn-secondary btn-block" style="margin-top: 1.5rem;" onclick="cerrarSesion()">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+        </button>
+      </aside>
+
+      <section>
+
+        <div class="dashboard-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <h3 style="color: var(--color-primary);">Mis Postulaciones de Adopción</h3>
+            <a href="adopcion.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.3rem 0.8rem;">+ Ver animales</a>
+          </div>
+          <div id="listaPostulaciones"></div>
+        </div>
+
+        <div class="dashboard-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <h3 style="color: var(--color-primary);">Presupuestos Guardados</h3>
+            <a href="calculadora.html" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.3rem 0.8rem;">+ Nuevo Cálculo</a>
+          </div>
+          <div id="listaPresupuestos"></div>
+        </div>
+
+        <div class="dashboard-panel">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <h3 style="color: var(--color-primary);">Mis Reportes de Rescate</h3>
+            <a href="reportar.html" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.3rem 0.8rem;">+ Crear Reporte</a>
+          </div>
+          <div id="listaReportes"></div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    const correo = Huellitas.sesion();
+    if (!correo) {
+      location.replace('login.html?volver=perfil.html');
+    } else {
+      document.getElementById('perfilCorreo').textContent = correo;
+    }
+
+    const fechaCorta = (f) => new Date(f.replace(' ', 'T')).toLocaleDateString('es-CO');
+    const cargando = '<div class="history-item"><p style="font-size: 0.88rem; color: var(--color-text-muted);"><i class="fa-solid fa-spinner fa-spin"></i> Cargando...</p></div>';
+    document.getElementById('listaPostulaciones').innerHTML = cargando;
+    document.getElementById('listaReportes').innerHTML = cargando;
+
+    async function cargarPerfil() {
+      let datos;
+      try {
+        datos = await Huellitas.api('perfil');
+      } catch (error) {
+        if (!Huellitas.sesion()) return location.replace('login.html?volver=perfil.html');
+        Huellitas.avisar(error.message);
+        return;
+      }
+      const u = datos.usuario;
+      document.getElementById('perfilNombre').textContent = `${u.nombre} ${u.apellido}`;
+      document.getElementById('perfilDesde').textContent = fechaCorta(u.fecha_registro);
+
+      document.getElementById('listaPostulaciones').innerHTML = datos.postulaciones.length
+        ? datos.postulaciones.map(p => `
+            <div class="history-item">
+              <div>
+                <p style="font-weight: 600; color: var(--color-text-main);">🐾 Adopción de ${p.animal}</p>
+                <p style="font-size: 0.85rem; color: var(--color-text-muted);">Enviada el ${fechaCorta(p.fecha)}</p>
+              </div>
+              <span style="background: #FEF3C7; color: #92400E; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 12px;">${p.estado}</span>
+            </div>`).join('')
+        : `<div class="history-item"><p style="font-size: 0.88rem; color: var(--color-text-muted);">Aún no te has postulado para adoptar. <a href="adopcion.html" style="color: var(--color-primary); font-weight: 600;">Conoce a los animales disponibles</a>.</p></div>`;
+
+      document.getElementById('listaReportes').innerHTML = datos.reportes.length
+        ? datos.reportes.map(r => `
+            <div class="history-item">
+              <div>
+                <p style="font-weight: 600; color: var(--color-text-main);">Caso #HU-${String(r.id_reporte).padStart(5, '0')} &middot; ${r.situacion}</p>
+                <p style="font-size: 0.85rem; color: var(--color-text-muted);">${r.animal} &middot; ${r.ubicacion} &middot; ${fechaCorta(r.fecha)}</p>
+              </div>
+              <span style="background: #FEF3C7; color: #92400E; font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 12px;">${r.estado}</span>
+            </div>`).join('')
+        : `<div class="history-item"><p style="font-size: 0.88rem; color: var(--color-text-muted);">Aún no has hecho ningún reporte. <a href="reportar.html" style="color: var(--color-primary); font-weight: 600;">Reportar un animal en riesgo</a>.</p></div>`;
+    }
+    if (correo) cargarPerfil();
+
+    const presupuestos = Huellitas.leer('huellitasPresupuestos');
+    const pesos = (n) => '$' + n.toLocaleString('es-CO');
+    document.getElementById('listaPresupuestos').innerHTML = presupuestos.length
+      ? presupuestos.map(p => `
+          <div class="history-item">
+            <div>
+              <p style="font-weight: 600; color: var(--color-text-main);">${p.especie === 'gato' ? '🐱' : '🐶'} Presupuesto para ${p.especie}</p>
+              <p style="font-size: 0.85rem; color: var(--color-text-muted);">Guardado el ${p.fecha}</p>
+            </div>
+            <div style="text-align: right;">
+              <p style="font-weight: 700; color: var(--color-primary);">${pesos(p.mensual)} COP / mes</p>
+              <p style="font-size: 0.8rem; color: var(--color-accent); font-weight: 600;">${pesos(p.mensual * 12)} COP / año</p>
+            </div>
+          </div>`).join('')
+      : `<div class="history-item"><p style="font-size: 0.88rem; color: var(--color-text-muted);">Aún no has guardado ningún presupuesto. <a href="calculadora.html" style="color: var(--color-primary); font-weight: 600;">Usar la calculadora</a>.</p></div>`;
+
+    function cerrarSesion() {
+      Huellitas.cerrarSesion();
+      location.href = '../index.html';
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Buzón Ciudadano — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-envelope-open-text"></i> Buzón ciudadano</span>
+      <h1>Queremos escucharte</h1>
+      <p>Envíanos tus preguntas, sugerencias o propuestas. Respondemos todos los mensajes.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="report-layout">
+
+      <div class="form-card">
+        <form id="formBuzon" onsubmit="enviarMensaje(event)">
+          <p class="field-label">¿Sobre qué quieres escribirnos?</p>
+          <div class="choice-cards">
+            <label><input type="radio" name="tipo" value="Pregunta" required><span><i class="fa-solid fa-circle-question"></i><strong>Pregunta</strong></span></label>
+            <label><input type="radio" name="tipo" value="Sugerencia"><span><i class="fa-solid fa-lightbulb"></i><strong>Sugerencia</strong></span></label>
+            <label><input type="radio" name="tipo" value="Alianza"><span><i class="fa-solid fa-handshake"></i><strong>Alianza</strong></span></label>
+            <label><input type="radio" name="tipo" value="Felicitación"><span><i class="fa-solid fa-face-smile"></i><strong>Felicitación</strong></span></label>
+            <label><input type="radio" name="tipo" value="Queja"><span><i class="fa-solid fa-comment-dots"></i><strong>Queja</strong></span></label>
+            <label><input type="radio" name="tipo" value="Otro"><span><i class="fa-solid fa-ellipsis"></i><strong>Otro</strong></span></label>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nombre">Nombre</label>
+              <input type="text" id="nombre" class="form-control" required placeholder="Tu nombre">
+            </div>
+            <div class="form-group">
+              <label for="email">Correo electrónico</label>
+              <input type="email" id="email" class="form-control" required placeholder="ejemplo@correo.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="mensaje">Mensaje</label>
+            <textarea id="mensaje" class="form-control" rows="5" required placeholder="Escribe tu mensaje..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg btn-block">
+            <i class="fa-solid fa-paper-plane"></i> Enviar mensaje
+          </button>
+        </form>
+
+        <div id="mensajeEnviado" class="form-success hidden">
+          <div class="modal-icon modal-icon--ok"><i class="fa-solid fa-circle-check"></i></div>
+          <h2>¡Mensaje enviado!</h2>
+          <p>Gracias por escribirnos. Te responderemos a tu correo en un plazo máximo de 3 días hábiles.</p>
+          <div class="test-result-actions">
+            <button class="btn btn-secondary" onclick="otroMensaje()">Escribir otro mensaje</button>
+          </div>
+        </div>
+      </div>
+
+      <aside class="report-aside">
+        <div class="side-card">
+          <h3>Otros canales</h3>
+          <ul class="contact-list">
+            <li>
+              <a href="https://wa.me/573024338944" target="_blank">
+                <span class="service-icon service-icon--green"><i class="fa-brands fa-whatsapp"></i></span>
+                <span><strong>WhatsApp</strong><small>302 433 8944 · respuesta más rápida</small></span>
+              </a>
+            </li>
+            <li>
+              <a href="mailto:fundacionhuellitas19@gmail.com">
+                <span class="service-icon"><i class="fa-solid fa-envelope"></i></span>
+                <span><strong>Correo</strong><small>fundacionhuellitas19@gmail.com</small></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/fundacionhuellitas.co/" target="_blank">
+                <span class="service-icon service-icon--blue"><i class="fa-brands fa-instagram"></i></span>
+                <span><strong>Instagram</strong><small>@fundacionhuellitas.co</small></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="side-card side-card--soft">
+          <h3><i class="fa-solid fa-triangle-exclamation"></i> ¿Es una emergencia?</h3>
+          <p class="side-card-text">El buzón no es para urgencias. Si un animal está en peligro, repórtalo o llama a las líneas de emergencia.</p>
+          <a href="reportar.html" class="btn btn-primary btn-block btn-sm">Reportar un caso</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <script>
+    async function enviarMensaje(e) {
+      e.preventDefault();
+      const form = e.target;
+      Huellitas.enviando(form, true);
+      try {
+        await Huellitas.api('mensajes', {
+          tipo: form.tipo.value,
+          nombre: document.getElementById('nombre').value,
+          correo: document.getElementById('email').value,
+          mensaje: document.getElementById('mensaje').value,
+        });
+      } catch (error) {
+        Huellitas.avisar(error.message);
+        Huellitas.enviando(form, false);
+        return;
+      }
+      Huellitas.enviando(form, false);
+      e.target.classList.add('hidden');
+      document.getElementById('mensajeEnviado').classList.remove('hidden');
+    }
+
+    function otroMensaje() {
+      const form = document.getElementById('formBuzon');
+      form.reset();
+      form.classList.remove('hidden');
+      document.getElementById('mensajeEnviado').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>

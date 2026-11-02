@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#293241">
+  <title>Mapa de Rescate — Fundación Huellitas</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+</head>
+<body>
+  <script src="../js/componentes.js"></script>
+
+  <header class="page-hero page-hero--compact">
+    <div class="page-hero-content">
+      <span class="page-hero-tag"><i class="fa-solid fa-map-location-dot"></i> Mapa de rescate</span>
+      <h1>Ayuda cerca de ti</h1>
+      <p>Encuentra veterinarias aliadas, fundaciones, puntos de acopio y casos activos reportados por la comunidad.</p>
+    </div>
+  </header>
+
+  <main class="main-content">
+
+    <div class="map-filters" id="filtros"></div>
+
+    <div class="map-layout">
+      <div class="map-box">
+        <div id="mapa" aria-label="Mapa de puntos de rescate"></div>
+        <button class="map-locate" onclick="centrarEnMi(this)">
+          <i class="fa-solid fa-location-crosshairs"></i> Mi ubicación
+        </button>
+      </div>
+
+      <aside class="map-list">
+        <h3>Puntos en el mapa <span id="contador"></span></h3>
+        <ul id="listaPuntos"></ul>
+      </aside>
+    </div>
+
+    <div class="help-banner">
+      <div>
+        <h2>¿Viste un animal que necesita ayuda?</h2>
+        <p>Repórtalo y aparecerá en el mapa para que nuestra red pueda actuar.</p>
+      </div>
+      <a href="reportar.html" class="btn btn-primary btn-lg"><i class="fa-solid fa-bullhorn"></i> Reportar un caso</a>
+    </div>
+
+    <div class="info-note">
+      <i class="fa-solid fa-user-shield"></i>
+      <p><strong>Privacidad:</strong> para proteger a quienes reportan, el mapa solo muestra ubicaciones aproximadas de los casos y nunca nombres ni teléfonos.</p>
+    </div>
+  </main>
+
+  <script>
+    const TIPOS = {
+      reporte:     { nombre: 'Casos activos',          icono: 'fa-triangle-exclamation', color: '#E63946' },
+      veterinaria: { nombre: 'Veterinarias aliadas',   icono: 'fa-stethoscope',          color: '#2A9D8F' },
+      fundacion:   { nombre: 'Fundaciones y refugios', icono: 'fa-heart',                color: '#3D5A80' },
+      acopio:      { nombre: 'Puntos de acopio',       icono: 'fa-box-open',             color: '#9A6234' },
+    };
+
+    const PUNTOS = [
+      { tipo: 'fundacion', nombre: 'Fundación Huellitas', detalle: 'Sede principal · Medellín', coords: [6.2518, -75.5636] },
+      { tipo: 'fundacion', nombre: 'Refugio Huellas de Esperanza', detalle: 'Refugio aliado · Copacabana', coords: [6.3463, -75.5089] },
+      { tipo: 'veterinaria', nombre: 'Clínica Veterinaria Patitas', detalle: 'Consulta y cirugía · Bello', coords: [6.3373, -75.5579] },
+      { tipo: 'veterinaria', nombre: 'Centro Veterinario del Sur', detalle: 'Urgencias 24 h · Envigado', coords: [6.1716, -75.5875] },
+      { tipo: 'acopio', nombre: 'Punto de acopio Laureles', detalle: 'Recibe alimento y mantas · Medellín', coords: [6.2447, -75.5976] },
+      { tipo: 'acopio', nombre: 'Punto de acopio Itagüí', detalle: 'Recibe alimento y arena · Itagüí', coords: [6.1726, -75.6110] },
+      { tipo: 'reporte', nombre: 'Perro herido', detalle: 'Zona norte de Bello · En atención', coords: [6.3450, -75.5500] },
+      { tipo: 'reporte', nombre: 'Gato abandonado', detalle: 'Robledo, Medellín · En verificación', coords: [6.2770, -75.5940] },
+      { tipo: 'reporte', nombre: 'Perra con cachorros', detalle: 'Sabaneta · Buscando hogar de paso', coords: [6.1515, -75.6166] },
+    ];
+
+    Huellitas.leer('huellitasReportes').forEach(r => {
+      const m = /Coordenadas: (-?\d+\.\d+), (-?\d+\.\d+)/.exec(r.ubicacion || '');
+      if (m) PUNTOS.push({ tipo: 'reporte', nombre: r.situacion, detalle: `Tu reporte ${r.numero} · ${r.estado}`, coords: [Number(m[1]), Number(m[2])] });
+    });
+
+    const mapa = L.map('mapa', { scrollWheelZoom: false }).setView([6.25, -75.58], 12);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(mapa);
+
+    const visibles = new Set(Object.keys(TIPOS));
+    const icono = (tipo) => L.divIcon({
+      className: '',
+      html: `<span class="map-pin" style="--pin: ${TIPOS[tipo].color}"><i class="fa-solid ${TIPOS[tipo].icono}"></i></span>`,
+      iconSize: [36, 36],
+      iconAnchor: [18, 36],
+      popupAnchor: [0, -34],
+    });
+
+    PUNTOS.forEach(p => {
+      p.marcador = L.marker(p.coords, { icon: icono(p.tipo) })
+        .bindPopup(`<strong>${p.nombre}</strong><br><span>${p.detalle}</span>`)
+        .addTo(mapa);
+    });
+
+    mapa.fitBounds(PUNTOS.map(p => p.coords), { padding: [50, 50] });
+
+    document.getElementById('filtros').innerHTML = Object.entries(TIPOS).map(([id, t]) => `
+      <label class="map-filter">
+        <input type="checkbox" checked onchange="alternarTipo('${id}', this.checked)">
+        <span style="--pin: ${t.color}"><i class="fa-solid ${t.icono}"></i> ${t.nombre}</span>
+      </label>`).join('');
+
+    function alternarTipo(tipo, mostrar) {
+      mostrar ? visibles.add(tipo) : visibles.delete(tipo);
+      PUNTOS.forEach(p => {
+        if (p.tipo !== tipo) return;
+        mostrar ? p.marcador.addTo(mapa) : p.marcador.remove();
+      });
+      dibujarLista();
+    }
+
+    function dibujarLista() {
+      const lista = PUNTOS.filter(p => visibles.has(p.tipo));
+      document.getElementById('contador').textContent = `(${lista.length})`;
+      document.getElementById('listaPuntos').innerHTML = lista.map(p => `
+        <li>
+          <button onclick="irA(${PUNTOS.indexOf(p)})">
+            <span class="map-list-icon" style="--pin: ${TIPOS[p.tipo].color}"><i class="fa-solid ${TIPOS[p.tipo].icono}"></i></span>
+            <span><strong>${p.nombre}</strong><small>${p.detalle}</small></span>
+          </button>
+        </li>`).join('');
+    }
+
+    function irA(i) {
+      const p = PUNTOS[i];
+      mapa.flyTo(p.coords, 15);
+      p.marcador.openPopup();
+      document.getElementById('mapa').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function centrarEnMi(boton) {
+      if (!navigator.geolocation) return alert('Tu navegador no permite obtener la ubicación.');
+      boton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Buscando...';
+      navigator.geolocation.getCurrentPosition(pos => {
+        const yo = [pos.coords.latitude, pos.coords.longitude];
+        L.circleMarker(yo, { radius: 9, color: '#FFFFFF', weight: 3, fillColor: '#3D5A80', fillOpacity: 1 })
+          .bindPopup('Estás aquí').addTo(mapa).openPopup();
+        mapa.flyTo(yo, 14);
+        boton.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Mi ubicación';
+      }, () => {
+        alert('No pudimos obtener tu ubicación. Revisa los permisos del navegador.');
+        boton.innerHTML = '<i class="fa-solid fa-location-crosshairs"></i> Mi ubicación';
+      });
+    }
+
+    dibujarLista();
+  </script>
+</body>
+</html>
